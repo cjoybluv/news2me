@@ -1,11 +1,32 @@
 {
   "name": "new_sentiments",
   "version": "1.0.0",
-  "description": "",
+  "description": "hi news",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cjoybluv/new_sentiments.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cjoybluv/new_sentiments/issues"
+  },
+  "homepage": "https://github.com/cjoybluv/new_sentiments#readme",
+  "dependencies": {
+    "bcrypt": "^0.8.5",
+    "body-parser": "^1.13.3",
+    "ejs": "^2.3.3",
+    "express": "^4.13.3",
+    "express-ejs-layouts": "^1.1.0",
+    "express-session": "^1.11.3",
+    "pg": "^4.4.1",
+    "pg-hstore": "^2.3.2",
+    "request": "^2.60.0",
+    "sequelize": "^3.5.1",
+    "sequelize-cli": "^1.7.4"
+  }
 }
