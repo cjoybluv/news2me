@@ -9,9 +9,21 @@
 </head>
 <body>
 
-  <div class="container">
-    <%- body %>
-  </div>
+<div class="container">
+  <h1>News 2 Me</h1>
+  <% if(currentUser) { %>
+    Hello, <b><%= typeof currentUser.name === 'string' ? currentUser.name : 'Unknown' %></b>.
+    <a href="/auth/logout" class="btn btn-primary">Logout</a>
+  <% }else{ %>
+    <a href="/auth/login" class="btn btn-primary">Login</a>
+    <a href="/auth/signup" class="btn btn-primary">Signup</a>
+  <% } %>
+  <br><br>
+  <a href="/restricted" class="btn btn-danger">Go to restricted page</a>
+
+  <%- body %>
+
+</div>
 
 </body>
 </html>
