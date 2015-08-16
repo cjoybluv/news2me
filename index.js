@@ -8,6 +8,7 @@ var flash = require('connect-flash');
 
 var authController = require("./controllers/auth")
 var mainController = require("./controllers/main")
+var twitterController = require("./controllers/twitter")
 
 var app = express();
 
@@ -50,6 +51,7 @@ app.use(ejsLayouts);
 
 app.use("/auth", authController);
 app.use("/", mainController);
+app.use("/twitter", twitterController);
 
 
 
