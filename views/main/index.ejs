@@ -1,2 +1,12 @@
 <h2>Home Index</h2>
 
+
+<p>channel_name is: <strong><%= channel_name %></strong></p>
+
+<p>search_terms are: </p>
+
+<ul>
+  <% search_terms.forEach(function(term) { %>
+    <li><strong><%= term %></strong></li>
+  <% }); %>
+</ul>

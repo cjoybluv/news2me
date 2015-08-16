@@ -1,4 +1,4 @@
-// var db = require('../models');
+var db = require('../models');
 var express = require('express');
 var router = express.Router();
 
@@ -6,7 +6,23 @@ var router = express.Router();
 
 router.get("/", function(req, res) {
     // console.log('hey i got it!!!!')
-    res.render('main/index');
+  var defaultChannel = 'presidentElect2016';
+  db.channel.find({
+    where:{
+      name: defaultChannel
+    }
+  }).then(function(channel){
+    var result = channel.get().search_terms.split('///').map(function(term){
+      return '@'+term.replace(/ /gi, '').toLowerCase()});
+
+
+    console.log('@array',result);
+    // // do something with this result HERE!!! like...
+    res.render('main/index', {
+      channel_name: channel.get().name,
+      search_terms: result
+    });
+  });
 });
 
 //GET /restricted
