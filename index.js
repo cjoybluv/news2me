@@ -55,5 +55,18 @@ app.use("/twitter", twitterController);
 
 
 
+=======
+
+
+var app = express();
+
+
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.get("/", function(req, res) {
+    res.render('main/index');
+})
+>>>>>>> bfb40a20e18cea373590402425e10e59c500558a
 
 app.listen(3000);
