@@ -13,7 +13,8 @@ router.get("/", function(req, res) {
     }
   }).then(function(channel){
     var result = channel.get().search_terms.split('///').map(function(term){
-      return '@'+term.replace(/ /gi, '').toLowerCase()});
+      // return '@'+term.replace(/ /gi, '').toLowerCase()});
+      return term});
 
 
     console.log('@array',result);
