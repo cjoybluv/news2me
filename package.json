@@ -27,7 +27,9 @@
     "pg": "^4.4.1",
     "pg-hstore": "^2.3.2",
     "request": "^2.60.0",
+    "sentiment": "^1.0.2",
     "sequelize": "^3.5.1",
-    "sequelize-cli": "^1.7.4"
+    "sequelize-cli": "^1.7.4",
+    "twitter": "^1.2.5"
   }
 }
