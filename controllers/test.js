@@ -22,7 +22,8 @@ var async = require('async');
     }).then(function(channel){
       var result = channel.get().search_terms.split('///').map(function(term){
         // return '@'+term.replace(/ /gi, '').toLowerCase()});
-				return term});
+        return term});
+
 
       console.log('@array',result);
       // // do something with this result HERE!!! like...
@@ -30,8 +31,8 @@ var async = require('async');
        var candidates = result;
 
        async.map(candidates, function(candidate, callback) {
-         console.log("Searching for tweets on  : " + candidate);
-         client.get('search/tweets', {'q': candidate + ' since:2015-08-01', 'count': 30, 'result\_type':'popular'},
+        console.log("Searching for tweets on  : " + candidate);
+        client.get('search/tweets', {'q': candidate + ' since:2015-08-01', 'count': 30, 'result\_type':'popular'},
            function(error, tweets, response){
              // if(error) throw error;
               // console.log(tweets);  // The favorites.
@@ -43,8 +44,8 @@ var async = require('async');
            });
        }, function(err,result) {
            // console.log(result);
-           // res.send(result);
-           res.render('twitter/index', {result: result});
+           res.send(result);
+           // res.render('twitter/index', {result: result});
            result.forEach(function(person){
                console.log(person.term);
                console.log(person.tweets.statuses.length);

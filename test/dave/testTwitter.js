@@ -47,7 +47,6 @@ client.get('search/tweets', {'q':' hillary or trump  since:2015-08-01', 'count':
   // res.render('twitter', {tweets: tweets})
 });
 //check limit on API
->>>>>>> 3fcad1cbd05b346c08731fa66fed5e209027c527
 // client.get('application/rate_limit_status', function(error, limit, response){
 //   if(error) throw error;
 //   // console.log(response);  // Raw response object.
@@ -71,10 +70,6 @@ client.get('search/tweets', {'q':' hillary or trump  since:2015-08-01', 'count':
  //    });
  //  });
 
-<<<<<<< HEAD
-
-=======
 });
->>>>>>> 3fcad1cbd05b346c08731fa66fed5e209027c527
 
 module.exports = router;
