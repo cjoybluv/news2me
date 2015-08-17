@@ -24,7 +24,7 @@ ul.search-items {
 .search-item li {
   list-style-type: none;
   padding: 1em;
-  /*margin: 1em;*/
+  margin: .5em 0;
   background-color: #e6e6e6;
   position: relative;
   border: 1px solid #cecece;
