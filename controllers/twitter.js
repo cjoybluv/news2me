@@ -8,7 +8,7 @@ var async = require('async');
  router.get('/', function(req,res){
  	// res.send('hello');
 	  var client = new Twitter({
-		  consumer_key: process.env.TWITTR_CONSUMER_KEY,
+		  consumer_kgey: process.env.TWITTR_CONSUMER_KEY,
 		  consumer_secret: process.env.TWITTR_CONSUMER_SECRET,
 		  access_token_key: process.env.TWITTR_ACCESS_TOKEN_KEY,
 		  access_token_secret: process.env.TWITTR_ACCESS_TOKEN_SECRET
