@@ -51,3 +51,24 @@ img.headshot {
   margin-right: 1em;
 }
 
+/* D3 styles */
+
+svg {
+/*  width: 20em;
+  height: 20em;
+*/}
+
+svg .circle {
+  fill: yellow;
+  stroke: red;
+  stroke-width: 1;
+}
+
+svg div.bar {
+  background-color: #000000;
+  width: 10px;
+  height: 20px;
+  display: inline-block;
+  margin-right: 2px;
+}
+
