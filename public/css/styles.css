@@ -2,10 +2,20 @@ body {
 
 }
 
+.mynav {
+  min-height: 80px;
+}
+
+.mynav .navbar-brand {
+  font-size: 4em;
+  padding: .5em;
+}
+
 .search-item {
   float: left;
   /*padding-left: 0;*/
 }
+
 
 ul.search-items {
   padding: 0;
@@ -15,5 +25,29 @@ ul.search-items {
   list-style-type: none;
   padding: 1em;
   /*margin: 1em;*/
-  background-color: #cecece;
+  background-color: #e6e6e6;
+  position: relative;
+  border: 1px solid #cecece;
+  border-radius: 5px;
 }
+
+.tweet-num {
+/*  position: absolute;
+  right: 1em;
+  bottom: 1em;*/
+  float: right;
+  margin: 1em 1em 0 0;
+}
+
+h4 {
+  /*padding-left: 1em;*/
+}
+
+img.headshot {
+  /*margin-right: 1em;*/
+  width: 70px;
+  border: 1px solid #000;
+  float: left;
+  margin-right: 1em;
+}
+
