@@ -6,6 +6,7 @@ var request = require('request');
 var session = require('express-session');
 var flash = require('connect-flash');
 
+
 var authController = require("./controllers/auth");
 var mainController = require("./controllers/main");
 var twitterController = require("./controllers/twitter");
@@ -19,7 +20,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // session user stuff
 app.use(session({
-  secret:'realdonaltrump',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }));

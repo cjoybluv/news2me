@@ -1,5 +1,1 @@
-development notes
-
-this line too
-
-this is cheryl's text  // cheryl, I fixed this line, dh
+consumer_key is: <%= consumer_key %> !!!
