@@ -51,7 +51,13 @@ img.headshot {
   margin-right: 1em;
 }
 
-/* D3 styles */
+/* FORM styles --> */
+.input-group {
+  margin-bottom: .5em;
+}
+
+
+/* D3 styles --> */
 
 svg {
 /*  width: 20em;
