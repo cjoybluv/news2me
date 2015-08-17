@@ -1,11 +1,11 @@
-<% result.forEach(function(person){%> 
+<% result.forEach(function(person){%>
 
  <h1> Top 15 Tweets for:  <%= person.term %></h1>
-				  <% person.tweets.statuses.forEach(function(person){ %>
-				  <div class="well"> 	
-				  	<%= person.text %>
-				  	<%= person.retweet_count %>
-				  </div>
-				  	<% }) %>
+  <% person.tweets.statuses.forEach(function(person){ %>
+	  <div class="well">
+	  	<%= person.text %>
+	  	<%= person.retweet_count %>
+	  </div>
+ 	<% }) %>
 
 <% }) %>
