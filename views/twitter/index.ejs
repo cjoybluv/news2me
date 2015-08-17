@@ -1,11 +1,11 @@
-<h1>Trending tweets</h1>
-	<h3>Hillary Tweets</h3>
-	<% tweets.statuses.forEach(function (data){ %>
-		<div class="well">
-			<%= data.text %>
-			<%= data.retweet_count %>
-		</div>
+<% result.forEach(function(person){%>
 
-		 <% }) %>
-		 <img src="https://pbs.twimg.com/media/CMZ2TYoWIAETEWq.png">
-</div>
+ <h1> Top 15 Tweets for:  <%= person.term %></h1>
+  <% person.tweets.statuses.forEach(function(person){ %>
+	  <div class="well">
+	  	<%= person.text %>
+	  	<%= person.retweet_count %>
+	  </div>
+ 	<% }) %>
+
+<% }) %>
