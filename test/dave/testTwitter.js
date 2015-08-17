@@ -6,10 +6,10 @@ var Twitter = require('twitter');
 
   // res.send('hello');
     var client = new Twitter({
-      consumer_key: process.env.CONSUMER_KEY,
-      consumer_secret: process.env.CONSUMER_SECRET,
-      access_token_key: process.env.ACCESS_TOKEN_KEY,
-      access_token_secret: process.env.ACCESS_TOKEN_SECRET
+      consumer_key: process.env.TWITTR_CONSUMER_KEY,
+      consumer_secret: process.env.TWITTR_CONSUMER_SECRET,
+      access_token_key: process.env.TWITTR_ACCESS_TOKEN_KEY,
+      access_token_secret: process.env.TWITTR_ACCESS_TOKEN_SECRET
     });
 
   client.get('search/tweets', {'q':' hillary  since:2015-08-01', 'count': 50, 'result\_type':'popular'},
