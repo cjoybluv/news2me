@@ -6,7 +6,7 @@ $(function(){
  var svg = d3.select(".before-tweet-list").append("svg").attr("width",w).attr("height",h);
  var search_terms;
 
- console.log(dataset)
+ console.log('dataset',dataset)
  var people_searched = {}
 
  // console.log(twitter_result);

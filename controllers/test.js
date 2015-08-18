@@ -14,8 +14,8 @@ router.get('/', function(req,res){
          access_token_secret: process.env.TWITTR_ACCESS_TOKEN_SECRET
 		});
 
-   var defaultChannel = 'presidentElect2016';
-   // var defaultChannel = 'earthChanges';
+   // var defaultChannel = 'presidentElect2016';
+   var defaultChannel = 'earthChanges';
 
    db.channel.find({
       where:{
@@ -79,6 +79,13 @@ router.get('/', function(req,res){
                   }
                 }).spread(function(tweet, created) {
                   console.log('tweet created',tweet);
+                  if (!created) {
+                    console.log('>>>> FOUND <<<<<<< DO UPDATE',tweet);
+                    tweet.retweet_count = thisTweet.retweet_count;
+                    tweet.favorite_count = thisTweet.favorite_count;
+                    tweet.follower_count = thisTweet.user.followers_count;
+                    tweet.save();
+                  }
                   callback3(null,tweet);
                 }).catch(function(error) {
                   console.log('ERROR - creating tweet',error);
