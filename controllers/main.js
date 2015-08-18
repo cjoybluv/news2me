@@ -29,7 +29,8 @@ router.get("/", function(req, res) {
     // //  pre - DH
     // res.render('main/index', {
     //   channel_name: channel.get().name,
-    //   search_terms: result
+    //   search_terms: terms,
+    //   termImageUrls: termImages
     // });
 
     //  post - DH
