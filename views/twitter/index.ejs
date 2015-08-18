@@ -1,3 +1,5 @@
+<div class="tweet-list">
+
 <% result.forEach(function(person){%>
 
  <h1> Top 15 Tweets for:  <%= person.term %></h1>
@@ -9,3 +11,9 @@
  	<% }) %>
 
 <% }) %>
+
+<script type="text/javascript">
+  var twitter_result = <%- JSON.stringify(result) %>;
+</script>
+
+</div>

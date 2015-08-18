@@ -16,7 +16,6 @@ var app = express();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 
-
 // session user stuff
 app.use(session({
   secret:process.env.SESSION_SECRET,
