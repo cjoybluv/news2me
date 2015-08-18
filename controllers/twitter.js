@@ -3,7 +3,6 @@ var express = require('express');
 var router = express.Router();
 var Twitter = require('twitter');
 var async = require('async');
-<<<<<<< HEAD
 var sentiment = require('sentiment');
 
 router.get('/', function(req,res){
@@ -80,7 +79,6 @@ router.get('/', function(req,res){
 
 
 });
-=======
 
  router.get('/', function(req,res){
  	// res.send('hello');
@@ -112,7 +110,7 @@ router.get('/', function(req,res){
          client.get('search/tweets', {'q': candidate + ' since:2015-08-01', 'count': 30, 'result\_type':'popular'},
            function(error, tweets, response){
              // if(error) throw error;
-              // console.log(tweets);  // The favorites.
+              // console.log(tweets);  
               callback(null,{
                   term:candidate,
                   tweets:tweets
@@ -145,7 +143,6 @@ router.get('/', function(req,res){
 //   // console.log(response);  // Raw response object.
 // 	res.send(limit)
 // 	});
->>>>>>> 8bab808cffa37ccff98c3feb09c1f2bb8e4483a9
 
 
 //check limit on API
