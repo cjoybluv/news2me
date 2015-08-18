@@ -96,8 +96,26 @@ db.channel.findById(1).then(function(channel) {
   channel.termImageUrl = strUrls;
   channel.save();
 });
-  // END INIT CHANNEL
+// END INIT CHANNEL
 
+// var termImageUrls = [
+//   "https://pbs.twimg.com/profile_images/633318704818683904/aSE7bGdi_400x400.png",
+//   "https://pbs.twimg.com/media/CMm3ZNMWoAAPjbX.jpg",
+//   "https://pbs.twimg.com/profile_images/824835461/pic-volcano_400x400.jpg",
+//   "https://pbs.twimg.com/profile_images/824835461/pic-volcano_400x400.jpg",
+//   "https://pbs.twimg.com/profile_images/2629080684/b164f1486c1bc10172ad18712d0abe7b_400x400.png",
+//   "https://pbs.twimg.com/profile_images/1061306948/icon-tsunami_400x400.gif",
+//   "https://pbs.twimg.com/profile_images/569235246839631872/LTY0HWMd_400x400.jpeg",
+//   "https://pbs.twimg.com/profile_images/486539514010013696/nwAvlZ0v_400x400.png"
+//   ];
+
+// var strUrls = termImageUrls.toString().replace(/,/gi,'///');
+// console.log('strUrls',strUrls);
+// db.channel.findById(3).then(function(channel) {
+//   channel.termImageUrl = strUrls;
+//   channel.save();
+// });
+//   // END INIT CHANNEL
 
 
 

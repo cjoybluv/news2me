@@ -7,6 +7,7 @@ var router = express.Router();
 router.get("/", function(req, res) {
     // console.log('hey i got it!!!!')
   var defaultChannel = 'presidentElect2016';
+  // var defaultChannel = 'earthChanges';
   db.channel.find({
     where:{
       name: defaultChannel
