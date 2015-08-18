@@ -30,9 +30,10 @@ $(function(){
      .attr("width", w / dataset.length - barPadding)
      .attr("height", function(d){
       return 4;
-     }).attr("fill", function(d) {
-    return "rgb(" + (d) + ", " + (d * 5) + " , " + (d * 10) + ")";
-    }).transition().attr("height", function(d){
+     })
+     .attr("fill", function(d) {
+      return "rgb(" + (d) + ", " + (d * 5) + " , " + (d * 10) + ")";})
+     .transition().attr("height", function(d){
       return d * 4;
      }).attr("y", function(d){
       return h - (d * 4);
@@ -76,5 +77,62 @@ var dots = svg.selectAll("circle").data(datasetPlot).enter().append("circle");
     return Math.sqrt(d[1]);
    });
 
+// images
+
+
+// var last_names = search_terms.split(',')
+
+// var last_names = []
+
+// var thing = search_terms.split(',').forEach(function(item){
+// var thing = item.split(' ');
+//   last_names.push(thing[1].toLowerCase())
+// })
+
+// console.log(last_names)
+
+// var thumbnails = {"chafee":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/chafee-square-150.jpg",
+// "clinton":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/clinton-square-150.jpg",
+// "omalley":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/omalley-square-150.jpg",
+// "sanders":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/sanders-square-150.jpg",
+// "webb":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/webb-square-150.jpg",
+// "biden":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/biden-square-150.jpg",
+// "warren":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/warren-square-150.jpg",
+// "bush":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/bush-square-150.jpg",
+// "carson":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/carson-square-150.jpg",
+// "christie":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/christie-square-150.jpg",
+// "cruz":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/cruz-square-150.jpg",
+// "fiorina":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/fiorina-square-150.jpg",
+// "gilmore":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/gilmore-square-150.jpg",
+// "graham":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/graham-square-150.jpg",
+// "huckabee":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/huckabee-square-150.jpg",
+// "jindal":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/jindal-square-150.jpg",
+// "kasich":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/kasich-square-150.jpg",
+// "pataki":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/pataki-square-150.jpg",
+// "paul":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/paul-square-150.jpg",
+// "perry":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/perry-square-150.jpg",
+// "rubio":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/rubio-square-150.jpg",
+// "santorum":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/santorum-square-150.jpg",
+// "trump":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/trump-square-150.jpg",
+// "walker":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/walker-square-150.jpg",
+// "romney":"http://graphics8.nytimes.com/newsgraphics/2015/01/30/candidate-tracker/assets/images/romney-square-150.jpg"}
+
+// var name = $('.headshot img').attr('class');
+
+// $('.headshot img').attr({src: thumbnails.name})
+
+
+
+
+
+
+
+
+
+
 //  // end
+
+
+
+
 });

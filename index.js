@@ -9,12 +9,12 @@ var authController = require("./controllers/auth");
 var mainController = require("./controllers/main");
 var twitterController = require("./controllers/twitter");
 var d3testController = require("./controllers/d3test");
+var testController = require("./controllers/test");
 
 var app = express();
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
-
 
 // session user stuff
 app.use(session({
@@ -53,6 +53,7 @@ app.use("/auth", authController);
 app.use("/", mainController);
 app.use("/twitter", twitterController);
 app.use("/d3", d3testController);
+app.use("/test", testController);
 
 
 
