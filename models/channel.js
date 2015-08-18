@@ -2,12 +2,13 @@
 module.exports = function(sequelize, DataTypes) {
   var channel = sequelize.define('channel', {
     name: DataTypes.STRING,
-    search_terms: DataTypes.TEXT
+    search_terms: DataTypes.TEXT,
+    termImageUrl: DataTypes.TEXT
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
-      }
+        models.channel.hasMany(models.tweet);
+     }
     }
   });
   return channel;
