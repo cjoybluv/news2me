@@ -74,7 +74,8 @@ router.get('/', function(req,res){
                     sentiment_comparative: tweetSentiment.comparative,
                     sentiment_negative: tweetSentiment.negative.toString(),
                     sentiment_positive: tweetSentiment.positive.toString(),
-                    channelId: channel.id
+                    channelId: channel.id,
+                    follower_count: thisTweet.user.followers_count
                   }
                 }).spread(function(tweet, created) {
                   console.log('tweet created',tweet);

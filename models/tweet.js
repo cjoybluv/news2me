@@ -1,4 +1,3 @@
-var sentiment = require('sentiment');
 
 'use strict';
 module.exports = function(sequelize, DataTypes) {
@@ -16,7 +15,8 @@ module.exports = function(sequelize, DataTypes) {
     sentiment_positive: DataTypes.STRING,
     sentiment_negative: DataTypes.STRING,
     search_term: DataTypes.STRING,
-    channelId: DataTypes.INTEGER
+    channelId: DataTypes.INTEGER,
+    follower_count: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
