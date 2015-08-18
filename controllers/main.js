@@ -14,19 +14,31 @@ router.get("/", function(req, res) {
   }).then(function(channel){
 
 
-    var result = channel.get().search_terms.split('///');
+    var terms = channel.get().search_terms.split('///');
+    var termImages = channel.get().termImageUrl.split('///');
 
     // var result = channel.get().search_terms.split('///').map(function(term){
     //   // return '@'+term.replace(/ /gi, '').toLowerCase()});
     //   return term});
 
 
-    console.log('@array',result);
+    console.log('@array',terms);
     // // do something with this result HERE!!! like...
-    res.render('main/index', {
-      channel_name: channel.get().name,
-      search_terms: result
+
+    // //  pre - DH
+    // res.render('main/index', {
+    //   channel_name: channel.get().name,
+    //   search_terms: result
+    // });
+
+    //  post - DH
+    res.render('main/indexDH', {
+      channel: channel.get(),
+      search_terms: terms,
+      termImageUrls: termImages
     });
+
+
   });
 });
 
