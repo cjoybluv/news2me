@@ -15,6 +15,7 @@ router.get('/', function(req,res){
 		});
 
    var defaultChannel = 'presidentElect2016';
+   // var defaultChannel = 'earthChanges';
 
    db.channel.find({
       where:{
@@ -23,22 +24,22 @@ router.get('/', function(req,res){
     }).then(function(channel){
       var result = channel.get().search_terms.split('///').map(function(term){
         // return '@'+term.replace(/ /gi, '').toLowerCase()});
-        return term});
+        return term.toLowerCase()});
 
 
       console.log('@array',result);
       // // do something with this result HERE!!! like...
 
-       var candidates = result;
+       var searchTerms = result;
 
-       async.map(candidates, function(candidate, callback1) {
-        console.log("Searching for tweets on  : " + candidate);
-        client.get('search/tweets', {'q': candidate + ' since:2015-08-01', 'count': 30, 'result\_type':'popular'},
+       async.map(searchTerms, function(searchTerm, callback1) {
+        console.log("Searching for tweets on  : " + searchTerm);
+        client.get('search/tweets', {'q': searchTerm + ' since:2015-01-01', 'count': 30, 'result\_type':'popular'},
            function(error, tweets, response){
              // if(error) throw error;
               // console.log(tweets);  // The favorites.
               callback1(null,{
-                  term:candidate,
+                  term:searchTerm,
                   tweets:tweets
               });
 
@@ -72,7 +73,8 @@ router.get('/', function(req,res){
                     sentiment_score: tweetSentiment.score,
                     sentiment_comparative: tweetSentiment.comparative,
                     sentiment_negative: tweetSentiment.negative.toString(),
-                    sentiment_positive: tweetSentiment.positive.toString()
+                    sentiment_positive: tweetSentiment.positive.toString(),
+                    channelId: channel.id
                   }
                 }).spread(function(tweet, created) {
                   console.log('tweet created',tweet);

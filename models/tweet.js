@@ -1,3 +1,5 @@
+var sentiment = require('sentiment');
+
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var tweet = sequelize.define('tweet', {
@@ -13,11 +15,12 @@ module.exports = function(sequelize, DataTypes) {
     sentiment_comparative: DataTypes.FLOAT,
     sentiment_positive: DataTypes.STRING,
     sentiment_negative: DataTypes.STRING,
-    search_term: DataTypes.STRING
+    search_term: DataTypes.STRING,
+    channelId: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        models.tweet.belongsTo(models.channel);
       }
     }
   });
