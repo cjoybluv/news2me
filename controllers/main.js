@@ -14,7 +14,8 @@ router.get("/", function(req, res) {
     }
   }).then(function(channel){
 
-
+    console.log('channel',channel);
+    
     var terms = channel.get().search_terms.split('///');
     var termImages = channel.get().termImageUrl.split('///');
 

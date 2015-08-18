@@ -2,7 +2,7 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-     queryInterface.addColumn('channels', 'termImageUrl', Sequelize.STRING);
+     queryInterface.addColumn('channels', 'termImageUrl', Sequelize.TEXT);
  },
 
   down: function (queryInterface, Sequelize) {
