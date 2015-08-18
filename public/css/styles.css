@@ -1,81 +1,193 @@
-body {
+star {
+ color: rgb(10,15,180);
+}
 
+body.home {
+ /*background-color: #000000 ;*/
+ /*background-image: url('../images/movie-theatre-1234634.jpg');*/
+ background: url('../images/movie-theatre-1234634.jpg') no-repeat center center fixed;
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;
+}
+.float-container {
+ overflow: auto;
+ height: 100%;
+ position: relative;
+}
+body.favorites img {
+ margin-right: 1em;
+ height: 100px;
+}
+h1,
+h2 {
+ text-align: center;
+ margin-bottom: 1em;
+}
+/*body.favorites img::after {
+ content:'';
+ display:block;
+ clear: both;
+}*/
+body {
+ /*color: #cecece ;*/
+ /*background-color: #000;*/
+}
+.taglist {
+ margin: .3em 1em;
+ float: right;
+}
+.well {
+/*  color: #555;
+ background-color: rgba(40,40,40, .9);
+ border: 1px solid #000;*/
+ margin: .5em;
+}
+.btn-delete {
+ float: right;
+}
+button.comments {
+ /*margin: 1em;*/
+/*  position: absolute;
+ bottom: 0;
+ right: 0;*/
+}
+h3 {
+ color: #777;
+ margin-top: 2em;
+}
+a {
+ /*color: #D03229 ;*/
+ font-size: 1.2em;
+}
+.tomatoes strong {
+ color: rgb(200,30,40);
+}
+
+img {
+ border: 2px solid #000;
+ clear: both;
+ /*margin-top: 1em;*/
+}
+.results .container {
+ /*background-color: rgba(40,40,40, .9);*/
+ padding-bottom: 1em;
+ text-align: center;
+ /*margin-top: 10vh;*/
+}
+
+.back {
+ padding: .5em 1em;
+}
+
+Cheryl FitzGerald [10:51 AM]
+body {
+ background-color: #555;
 }
 
 .mynav {
-  min-height: 80px;
+ min-height: 80px;
+ background-color: #444;
+ border: 1px solid #777;
 }
 
 .mynav .navbar-brand {
-  font-size: 4em;
-  padding: .5em;
+ font-size: 4em;
+ padding: .5em;
+}
+.mynav.navbar-default .navbar-brand {
+ color: #79BD8F ;
+}
+.mynav.navbar-default .navbar-nav>li>a {
+ color: #999;
 }
 
 .search-item {
-  float: left;
-  /*padding-left: 0;*/
+ float: left;
+ /*padding-left: 0;*/
 }
 
+h1, h2 {
+ color: #e6e6e6 ;
+ font-weight: normal;
+ text-align: center;
+ margin-bottom: 1em;
+}
 
 ul.search-items {
-  padding: 0;
+ padding: 0;
+}
+
+.well {
+ opacity: .8;
 }
 
 .search-item li {
-  list-style-type: none;
-  padding: 1em;
-  margin: .5em 0;
-  background-color: #e6e6e6;
-  position: relative;
-  border: 1px solid #cecece;
-  border-radius: 5px;
+ list-style-type: none;
+ padding: 1em;
+ margin: .5em 0;
+ background-color: #e6e6e6 ;
+ position: relative;
+ border: 1px solid #cecece ;
+ border-radius: 5px;
+}
+
+ul.search-items h4 {
+ /*margin-top: 0;*/
+ text-align: center;
 }
 
 .tweet-num {
-/*  position: absolute;
-  right: 1em;
-  bottom: 1em;*/
-  float: right;
-  margin: 1em 1em 0 0;
+ float: right;
+ margin: 1em 1em 0 0;
 }
 
 h4 {
-  /*padding-left: 1em;*/
+ /*padding-left: 1em;*/
 }
 
-/* DH was here - headshot chgTo termImage */
+.headshot img {
+ /*margin-right: 1em;*/
+ width: 80px;
+ border: 1px solid #000;
+ display: block;
+ margin: 0 auto 1em;
+ border: 1px solid #999;
+ border-radius: 5px;
+}
 .termImage img {
-  /*margin-right: 1em;*/
-  max-width: 200px;
-  border: 1px solid #000;
-  float: left;
-  margin-right: 1em;
+ /*margin-right: 1em;*/
+ width: 80px;
+ border: 1px solid #000;
+ display: block;
+ margin: 0 auto 1em;
+ border: 1px solid #999;
+ border-radius: 5px;
 }
 
 /* FORM styles --> */
 .input-group {
-  margin-bottom: .5em;
+ margin-bottom: .5em;
 }
 
 
 /* D3 styles --> */
 
 svg {
-/*  width: 20em;
-  height: 20em;
-*/}
+ /*background-color: #fff;*/
+}
 
 svg .circle {
-  fill: yellow;
-  stroke: red;
-  stroke-width: 1;
+ fill: yellow;
+ stroke: red;
+ stroke-width: 1;
 }
 
 svg div.bar {
-  background-color: #000000;
-  width: 10px;
-  height: 20px;
-  display: inline-block;
-  margin-right: 2px;
+ background-color: #000000 ;
+ width: 10px;
+ height: 20px;
+ display: inline-block;
+ margin-right: 2px;
 }
-
