@@ -1,11 +1,14 @@
 <h2>Channel: <%= channel_name %></h2>
 
   <ul class="search-items">
+
     <% search_terms.forEach(function(term) { %>
     <div class="col-md-3 col-lg-3 search-item">
       <li>
-      <h4><%= term %>
-      <img class="headshot" src="#"></h4>
+      <% var last_name = term.split(' ') %>
+      <h4><%= term %></h4>
+      <div class="headshot"><img class="<%= last_name[1].toLowerCase() %>" src="#">
+      </div>
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           NEGATIVE-TO-POSITIVE GRAPH
@@ -17,5 +20,9 @@
       </li>
     </div>
     <% }); %>
+
   </ul>
-  
+
+<script type="text/javascript">
+  var search_terms = "<%- search_terms %>";
+</script>
