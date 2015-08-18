@@ -3,7 +3,6 @@ var express = require('express');
 var router = express.Router();
 var Twitter = require('twitter');
 var async = require('async');
-<<<<<<< HEAD
 var sentiment = require('sentiment');
 
 router.get('/', function(req,res){
@@ -145,7 +144,6 @@ router.get('/', function(req,res){
 //   // console.log(response);  // Raw response object.
 // 	res.send(limit)
 // 	});
->>>>>>> 8bab808cffa37ccff98c3feb09c1f2bb8e4483a9
 
 
 //check limit on API
