@@ -4,7 +4,7 @@ var router = express.Router();
 var Twitter = require('twitter');
 var async = require('async');
 
- router.get('/', function(req,res){
+router.get('/', function(req,res){
  	// res.send('hello');
 	  var client = new Twitter({
          consumer_key: process.env.TWITTR_CONSUMER_KEY,
@@ -44,18 +44,32 @@ var async = require('async');
            });
        }, function(err,result) {
            // console.log(result);
-           res.send(result);
            // res.render('twitter/index', {result: result});
-           result.forEach(function(person){
-               console.log(person.term);
-               console.log(person.tweets.statuses.length);
-               console.log(person.tweets.statuses.text);
-               console.log('-----')
-           })
-             console.log("DONE WITH EVERYTHING");
-       });
 
-    });
+           // // load record w/ sentiment stuff
+           result.forEach(function(search_term){
+              var tweets = search_term.tweets.statuses
+
+              // tweets.forEach(function(tweet) {
+              //   db.tweet.findOrCreate({
+              //     where:{tweet_id:tweet.id},
+              //     defaults:{
+
+              //     }
+              //   });
+
+             console.log(search_term.term);
+             console.log(search_term.tweets.statuses.length);
+             console.log(search_term.tweets.statuses[0].text);
+             console.log(typeof search_term.tweets.statuses[0].created_at);
+             console.log('-----');
+
+            });
+           res.send(result);
+
+           });
+          console.log("DONE WITH EVERYTHING");
+       });
 
 
 });
@@ -70,3 +84,4 @@ var async = require('async');
 // 	});
 
 module.exports = router;
+

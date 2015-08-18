@@ -8,7 +8,12 @@ module.exports = function(sequelize, DataTypes) {
     user_name: DataTypes.STRING,
     user_url: DataTypes.STRING,
     retweet_count: DataTypes.INTEGER,
-    favorite_count: DataTypes.INTEGER
+    favorite_count: DataTypes.INTEGER,
+    sentiment_score: DataTypes.INTEGER,
+    sentiment_comparative: DataTypes.FLOAT,
+    sentiment_positive: DataTypes.STRING,
+    sentiment_negative: DataTypes.STRING,
+    search_term: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
