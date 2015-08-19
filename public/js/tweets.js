@@ -30,21 +30,33 @@ var div = d3.select(".before-tweet-list").append("div")
        followers: tweet.user.followers_count,
        sentiment_score: tweet.sentiment.score,
        text: tweet.text,
-       url: "url"
+       url: 'url'
      });
    });
 
    // i++;
    });
  // });
- dataset = people_searched["Ben Carson"];
+ dataset = people_searched["Hillary Clinton"];
    console.log("people_searched",people_searched)
+ $(".before-tweet-list").append("Hillary Clinton");
 
- console.log('max data', d3.max(dataset))
+var retweet_count_by_term = [];
+
+dataset.forEach(function(tweet){
+  retweet_count_by_term.push(tweet.retweet_count);
+})
 
 var yScale = d3.scale.linear()
-        .domain([0, d3.max(dataset)])
-        .range([0, h])
+        .domain([0, d3.max(retweet_count_by_term)])
+        .range([0, (h-30)]);
+
+var xScale = d3.scale.ordinal()
+        .domain(d3.range(0,dataset.length))
+        .rangeBands([0, w])
+
+ console.log('max data', d3.max(retweet_count_by_term))
+ console.log(dataset.length)
 
 var barGraph = function(dataset){
  svg.selectAll("rect")
@@ -52,7 +64,7 @@ var barGraph = function(dataset){
     .enter()
     .append("rect")
     .attr("x", function(d,i){
-     return i * (w / dataset.length);
+     return xScale(i);
     })
     .attr("y", function(d){
      return h;
@@ -80,9 +92,9 @@ var barGraph = function(dataset){
     .transition()
     .delay(100)
     .duration(1000)
-    .attr("width", w / dataset.length - barPadding)
+    .attr("width", xScale.rangeBand())
     .attr("height", function(d){
-     return 4;
+     return yScale(4);
     })
     .attr("fill", function(d){
       if(d.sentiment_score === 0) {
@@ -103,10 +115,10 @@ var barGraph = function(dataset){
          return (d.sentiment_score + 1) * .1;
       }})
      .attr("height", function(d,i){
-       return d.retweet_count;})
+       return yScale(d.retweet_count);})
      .attr("y", function(d,i){
        console.log("retweet count",d.retweet_count)
-       return h - (d.retweet_count);})
+       return h - yScale(d.retweet_count);})
      .attr("stroke","#777");
 
     //  .append("svg:title")
@@ -125,7 +137,7 @@ var barGraph = function(dataset){
        return i * (w / dataset.length) + (w / dataset.length - barPadding) / 2;;
   })
   .attr("y", function(d) {
-       return h - (d.retweet_count) - 5;
+       return h - yScale(d.retweet_count) - 5;
   }).attr("fill", "#777777")
   .attr("text-anchor", "middle");
 }
@@ -170,7 +182,7 @@ var datasetPlot = [
 // }
 barGraph(dataset)
 
- $(".before-tweet-list").append("Jeb Bush");
+
 // for (key in people_searched) {
 //  barGraph(people_searched["Jeb Bush"]);
  // people_searched["Jeb Bush"].forEach(function(tweet){
