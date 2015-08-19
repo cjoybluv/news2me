@@ -1,16 +1,27 @@
 body {
- background-color: #555;
+ background-color: #cecece;
+  /*font-family: 'Arimo', sans-serif;*/
+  font-family: 'Titillium Web', sans-serif;
+ background-color: #444;
 }
 
 .mynav {
- min-height: 80px;
  background-color: #444;
- border: 1px solid #777;
+ min-height: 80px;
+ border: 1px solid transparent;
+}
+.navbar-default .navbar-text {
+  color: #cecece;
+}
+.container {
+  background-color: #fff;
+  border-radius: 6px;
 }
 
 .mynav .navbar-brand {
  font-size: 4em;
  padding: .5em;
+font-family: 'Merriweather', serif;
 }
 .mynav.navbar-default .navbar-brand {
  color: #79BD8F ;
@@ -24,16 +35,23 @@ body {
  /*padding-left: 0;*/
 }
 
+.node {
+  cursor: pointer;
+  stroke: #3182bd;
+  stroke-width: 1.5px;
+}
+
 h1, h2 {
- color: #e6e6e6 ;
+ /*color: #e6e6e6 ;*/
  font-weight: normal;
  text-align: center;
  margin-bottom: 1em;
+/*font-family: 'Merriweather', serif;*/
 }
 
 ul.search-items {
  padding: 0;
-}
+}.
 
 .well {
  opacity: .8;
@@ -43,9 +61,9 @@ ul.search-items {
  list-style-type: none;
  padding: 1em;
  margin: .5em 0;
- background-color: #e6e6e6 ;
+ background-color: rgba(0,163,136,.1); ;
  position: relative;
- border: 1px solid #cecece ;
+ border: 1px solid #79BD8F ;
  border-radius: 5px;
 }
 
@@ -54,30 +72,25 @@ ul.search-items h4 {
  text-align: center;
 }
 
+form {
+  margin-bottom: 3em;
+}
+
 .tweet-num {
  float: right;
  margin: 1em 1em 0 0;
 }
 
 h4 {
- /*padding-left: 1em;*/
-}
-
-.headshot img {
- /*margin-right: 1em;*/
- width: 80px;
- border: 1px solid #000;
- display: block;
- margin: 0 auto 1em;
- border: 1px solid #999;
- border-radius: 5px;
+ padding-left: 1em;
+ float: right;
 }
 
 .termImage img {
  /*margin-right: 1em;*/
- width: 80px;
+ width: 70px;
  border: 1px solid #000;
- display: block;
+ /*display: block;*/
  margin: 0 auto 1em;
  border: 1px solid #999;
  border-radius: 5px;
@@ -92,7 +105,7 @@ h4 {
 /* D3 styles --> */
 
 svg {
- /*background-color: #fff;*/
+ position: relative;
 }
 
 svg .circle {
@@ -107,4 +120,28 @@ svg div.bar {
  height: 20px;
  display: inline-block;
  margin-right: 2px;
+}
+
+.before-tweet-list rect {
+  position: relative;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 400px;
+  max-height: 120px;
+  padding: .5em;
+  font-size: 1.2em;
+  /*background: #BEEB9F;*/
+  background-color: #444;
+  color: #fff;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  pointer-events: none;
+  box-shadow: 2px 2px 10px #777;
+}
+
+div.tooltip i {
+  color: #59adeb;
 }

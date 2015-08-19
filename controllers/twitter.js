@@ -41,7 +41,7 @@ router.get('/', function(req,res){
 
       async.map(candidates, function(candidate, callback) {
         console.log("Searching for tweets on  : " + candidate);
-       client.get('search/tweets', {'q': candidate + ' since:2015-08-01', 'count': 5, 'result\_type':'popular'},
+       client.get('search/tweets', {'q': candidate + ' since:2015-08-01', 'count': 15, 'result\_type':'popular'},
           function(error, tweets, response){
             if(error) throw error;
              // console.log(tweets);  // The favorites.
