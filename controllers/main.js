@@ -5,6 +5,7 @@ var router = express.Router();
 
 // console.log('made it to router')
 
+
 router.get("/", function(req, res) {
     // console.log('hey i got it!!!!')
   var defaultChannel = 'presidentElect2016';
@@ -25,6 +26,7 @@ router.get("/", function(req, res) {
         // do something asynchronous here
         var termMetric = {};
         termMetric.term = term.term;
+        termMetric.image_url = term.image_url;
 
         db.tweet.findAll({
           where:{search_term: term.term}
@@ -36,9 +38,15 @@ router.get("/", function(req, res) {
           termMetric.favorite_total = tweets.reduce(function(a,b){
             return a + b.favorite_count;
           },0);
-          // var sentiment_avg = parseInt(tweets.reduce(function(a,b){
-          //      return a + b.sentiment_score;
-          // },0)/tweets.length);
+          var sentiment_avg = tweets.reduce(function(a,b){
+               return a + b.sentiment_score;
+          },0);
+          if(tweets.length) {
+            sentiment_avg = parseInt(sentiment_avg/tweets.length);
+          }else{
+            sentiment_avg = 0;
+          }
+          termMetric.sentiment_avg = sentiment_avg;
           var total = channelMetrics.push(termMetric);
           callback1(null,channelMetrics);
         });
@@ -46,10 +54,12 @@ router.get("/", function(req, res) {
         console.log('done with everything',channelMetrics);
         // callback1(err,'something');
         // res.send(channelMetrics[0]);
+        var metrics = channelMetrics[0].sort(retweet_sort);
+
         res.render('main/indexDH', {
           channel: thisChannel,
           search_terms: searchTerms,
-          channelMetrics: channelMetrics[0]
+          channelMetrics: metrics
         });
       });
       console.log('after loop');
@@ -71,6 +81,13 @@ router.get('/restricted',function(req,res){
   }
 });
 
+function retweet_sort(a,b) {
+  if (a.retweet_total < b.retweet_total)
+    return 1;
+  if (a.retweet_total > b.retweet_total)
+    return -1;
+  return 0;
+}
 
 
 module.exports = router;
