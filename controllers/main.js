@@ -17,6 +17,7 @@ router.get("/", function(req, res) {
     include:[db.searchterm]
   }).then(function(thisChannel){
       var channelMetrics = [];
+      var topTweets = [];
 
       thisChannel.getSearchterms().then(function(searchTerms) {
 
@@ -29,7 +30,9 @@ router.get("/", function(req, res) {
         termMetric.image_url = term.image_url;
 
         db.tweet.findAll({
-          where:{search_term: term.term}
+          where:{search_term: term.term},
+          order:[['tweet_created_at','ASC']],
+          limit: 15
         }).then(function(tweets){
 
           termMetric.retweet_total = tweets.reduce(function(a,b){
@@ -47,19 +50,27 @@ router.get("/", function(req, res) {
             sentiment_avg = 0;
           }
           termMetric.sentiment_avg = sentiment_avg;
+          termMetric.tweets = tweets;
           var total = channelMetrics.push(termMetric);
-          callback1(null,channelMetrics);
+          // var tweetTotal = topTweets.push(tweets);
+          callback1(null,{
+            channelMetrics: channelMetrics
+            // topTweets: topTweets
+          });
         });
-      }, function(err,channelMetrics) {
-        console.log('done with everything',channelMetrics);
-        // callback1(err,'something');
-        // res.send(channelMetrics[0]);
-        var metrics = channelMetrics[0].sort(retweet_sort);
+      }, function(err,results) {
+        var channelMetrics = results[0].channelMetrics;
+        var metrics = channelMetrics.sort(retweet_sort);
+        // var topTweets = results[0].topTweets;
+
+        // console.log('done with everything',channelMetrics);
+        // res.send(topTweets);
 
         res.render('main/indexDH', {
           channel: thisChannel,
           search_terms: searchTerms,
           channelMetrics: metrics
+          // topTweets: topTweets
         });
       });
       console.log('after loop');
