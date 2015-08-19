@@ -1,1 +1,14 @@
 consumer_key is: <%= consumer_key %> !!!
+
+twitter model:
+    hooks: {
+      beforeCreate: function(tweet, options, callback) {
+        var words = {'word':0};
+        var tweetSentiment = sentiment(tweet.text,words);
+        tweet.sentiment_scor = tweetSentiment.score;
+        tweet.sentiment_comparative = tweetSentiment.comparative;
+        tweet.sentiment_negative = tweetSentiment.negative.toString();
+        tweet.sentiment_positive = tweetSentiment.positive.toString();
+        callback(null,tweet);
+      }
+    }

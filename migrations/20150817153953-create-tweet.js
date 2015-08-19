@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       tweet_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       tweet_created_at: {
         type: Sequelize.DATE

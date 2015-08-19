@@ -1,7 +1,8 @@
+
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var tweet = sequelize.define('tweet', {
-    tweet_id: DataTypes.INTEGER,
+    tweet_id: DataTypes.STRING,
     tweet_created_at: DataTypes.DATE,
     tweet_text: DataTypes.STRING,
     tweet_source: DataTypes.STRING,
@@ -13,11 +14,13 @@ module.exports = function(sequelize, DataTypes) {
     sentiment_comparative: DataTypes.FLOAT,
     sentiment_positive: DataTypes.STRING,
     sentiment_negative: DataTypes.STRING,
-    search_term: DataTypes.STRING
+    search_term: DataTypes.STRING,
+    channelId: DataTypes.INTEGER,
+    follower_count: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        models.tweet.belongsTo(models.channel);
       }
     }
   });

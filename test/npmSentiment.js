@@ -41,7 +41,9 @@ var tweets = [
 
 '#Trump reacciona violentamente frente a negativa de dueños de Nacional de vender el club http://t.co/YV1AWlbu5J @nypost',
 
-'Trump-Sanders 2016? Bernie #Sanders, like Donald #Trump, is a product of dissatisfaction with the status quo: Column http://t.co/u8f6VNdnjc'
+'Trump-Sanders 2016? Bernie #Sanders, like Donald #Trump, is a product of dissatisfaction with the status quo: Column http://t.co/u8f6VNdnjc',
+
+'Walker said children of illegal immigrants born in the USA should not be granted citizenship, siding with Trump http://t.co/4I1rZxXvIi'
 ];
 
 

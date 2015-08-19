@@ -1,0 +1,21 @@
+<% tweets.forEach(function(tweet) { %>
+<div class="well">
+  <h5>Channel Name: <%= tweet.channel.name %></h5>
+  <p>id: <%= tweet.id %></p>
+  <p>tweet_id: <%= tweet.tweet_id %></p>
+  <p>tweet_created_at: <%= tweet.tweet_created_at %></p>
+  <p>tweet_text: <%= tweet.tweet_text %></p>
+  <p>tweet_source: <a href="<%= tweet.tweet_source %>"><%= tweet.tweet_source %></a></p>
+  <p>user_name: <%= tweet.user_name %></p>
+  <p>user_url: <a href="<%= tweet.user_url %>"><%= tweet.user_url %></a></p>
+  <p>retweet_count: <%= tweet.retweet_count %></p>
+  <p>favorite_count: <%= tweet.favorite_count %></p>
+  <p>created_at: <%= tweet.createdAt %></p>
+  <p>updated_at: <%= tweet.updatedAt %></p>
+  <p>sentiment_score: <%= tweet.sentiment_score %></p>
+  <p>sentiment_comparative: <%= tweet.sentiment_comparative %></p>
+  <p>sentiment_negative: <%= tweet.sentiment_negative.toString() %></p>
+  <p>sentiment_positive: <%= tweet.sentiment_positive.toString() %></p>
+
+</div>
+<% }) %>
