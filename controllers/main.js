@@ -7,15 +7,15 @@ var router = express.Router();
 
 
 router.get("/", function(req, res) {
-  var defaultChannel = 'presidentElect2016';
+  // var defaultChannel = 'presidentElect2016';
   // var defaultChannel = 'earthChanges';
   // var defaultChannel = '@presidentialCandidates';
-  req.session.currentChannel = defaultChannel;
+  if (!req.session.currentChannel) {
+    req.session.currentChannel = 1;
+  }
 
   db.channel.find({
-    where:{
-      name: req.session.currentChannel
-    },
+    where:{id:req.session.currentChannel},
     include:[db.searchterm]
   }).then(function(thisChannel){
       var channelMetrics = [];

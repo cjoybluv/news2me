@@ -28,7 +28,7 @@ app.use(session({
 app.use(flash());
 
 app.use(function(req,res,next){
-  // req.session.user=1;  // hard code user for development
+  req.session.user=2;  // hard code user for development
   if(req.session.user) {
     db.user.findById(req.session.user).then(function(user){
       req.currentUser = user;
