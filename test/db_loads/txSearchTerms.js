@@ -1,6 +1,6 @@
 var db = require('../../models');
 
-var channelId = 1;
+var channelId = 4;
 
 // create 1st search_term
 db.channel.findById(channelId).then(function(channel){

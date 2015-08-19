@@ -7,12 +7,14 @@ var router = express.Router();
 
 
 router.get("/", function(req, res) {
-    // console.log('hey i got it!!!!')
-  var defaultChannel = 'presidentElect2016';
+  // var defaultChannel = 'presidentElect2016';
   // var defaultChannel = 'earthChanges';
+  var defaultChannel = '@presidentialCandidates';
+  req.session.currentChannel = defaultChannel;
+
   db.channel.find({
     where:{
-      name: defaultChannel
+      name: req.session.currentChannel
     },
     include:[db.searchterm]
   }).then(function(thisChannel){
@@ -21,7 +23,7 @@ router.get("/", function(req, res) {
 
       thisChannel.getSearchterms().then(function(searchTerms) {
 
-      console.log('pre async',searchTerms.length);
+      // console.log('pre async',searchTerms.length);
 
       async.map(searchTerms,function(term,callback1){
         // do something asynchronous here
@@ -31,7 +33,7 @@ router.get("/", function(req, res) {
 
         db.tweet.findAll({
           where:{search_term: term.term},
-          order:[['tweet_created_at','ASC']],
+          order:[['tweet_created_at','DESC']],
           limit: 15
         }).then(function(tweets){
 
@@ -50,7 +52,7 @@ router.get("/", function(req, res) {
             sentiment_avg = 0;
           }
           termMetric.sentiment_avg = sentiment_avg;
-          termMetric.tweets = tweets;
+          termMetric.tweets = tweets.sort(date_asc);
           var total = channelMetrics.push(termMetric);
           // var tweetTotal = topTweets.push(tweets);
           callback1(null,{
@@ -73,10 +75,6 @@ router.get("/", function(req, res) {
           // topTweets: topTweets
         });
       });
-      console.log('after loop');
-
-      // console.log(searchTerms.length);
-      // res.send(channelMetrics);
 
     });
   });
@@ -100,5 +98,12 @@ function retweet_sort(a,b) {
   return 0;
 }
 
+function date_asc(a,b) {
+  if (a.tweet_created_at < b.tweet_created_at)
+    return -1;
+  if(a.tweet_created_at > b.tweet_created_at)
+    return 1;
+  return 0;
+}
 
 module.exports = router;

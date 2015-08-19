@@ -14,12 +14,13 @@ router.get('/', function(req,res){
          access_token_secret: process.env.TWITTR_ACCESS_TOKEN_SECRET
 		});
 
-   var defaultChannel = 'presidentElect2016';
+   // var defaultChannel = 'presidentElect2016';
    // var defaultChannel = 'earthChanges';
+   // var defaultChannel = '@presidentialCandidates';
 
    db.channel.find({
       where:{
-        name: defaultChannel
+        name: req.session.currentChannel
       }
     }).then(function(channel){
 
@@ -58,7 +59,7 @@ router.get('/', function(req,res){
                   var tweetSentiment = sentiment(thisTweet.text,words);
 
                     db.tweet.findOrCreate({
-                      where:{tweet_id:thisTweet.id.toString()},
+                      where:{tweet_id:thisTweet.id.toString(),channelId:channel.id},
                       defaults:{
                         tweet_id: thisTweet.id.toString(),
                         tweet_created_at: new Date(thisTweet.created_at),
@@ -95,11 +96,6 @@ router.get('/', function(req,res){
 
                 }, function(err) {
                   // console.log('done with everything');
-                 console.log(search_term.term);
-                 console.log(search_term.tweets.statuses.length);
-                 console.log(search_term.tweets.statuses[0].text);
-                 console.log(search_term.tweets.statuses[0].created_at);
-                 console.log('-----');
                  callback2(null,search_term.term);
 
                 });
