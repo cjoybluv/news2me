@@ -129,6 +129,8 @@ svg div.bar {
 }
 
 div.tooltip {
+  font-family: 'Titillium Web', sans-serif;
+  font-weight: normal;
   position: absolute;
   text-align: center;
   width: 400px;

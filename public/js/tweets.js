@@ -77,7 +77,7 @@ var barGraph = function(dataset){
       div.transition()
           .duration(200)
           .style("opacity", .8);
-      div.html('<i class="fa fa-twitter"></i> ' + d.text)
+      div.html('<i class="fa fa-twitter"></i> ' + d.text + "</br><em>Sentiment score: " + d.sentiment_score + "</em>")
           .style("left", (d3.event.pageX) + "px")
           .style("top", (d3.event.pageY - 80) + "px");
       }).on("mouseout", function(d) {
@@ -98,7 +98,7 @@ var barGraph = function(dataset){
     })
     .attr("fill", function(d){
       if(d.sentiment_score === 0) {
-        return "#ffffff";
+        return "#999999";
       }
        else if (d.sentiment_score < 2) {
          return "#FF6138";
@@ -108,7 +108,7 @@ var barGraph = function(dataset){
     })
      .attr("opacity",function(d){
       if (d.sentiment_score === 0) {
-        return .8;
+        return .2;
       } else if (d.sentiment_score < 0) {
          return (Math.abs(d.sentiment_score) + 2) * .1;
       } else {
