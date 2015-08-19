@@ -6,41 +6,23 @@ var router = express.Router();
 
 router.get("/", function(req, res) {
     // console.log('hey i got it!!!!')
-  // var defaultChannel = 'presidentElect2016';
-  var defaultChannel = 'earthChanges';
+  var defaultChannel = 'presidentElect2016';
+  // var defaultChannel = 'earthChanges';
   db.channel.find({
     where:{
       name: defaultChannel
-    }
-  }).then(function(channel){
+    },
+    include:[db.searchterm]
+  }).then(function(thisChannel){
 
-
-    var terms = channel.get().search_terms.split('///');
-    var termImages = channel.get().termImageUrl.split('///');
-
-    // var result = channel.get().search_terms.split('///').map(function(term){
-    //   // return '@'+term.replace(/ /gi, '').toLowerCase()});
-    //   return term});
-
-
-    console.log('@array',terms);
-    // // do something with this result HERE!!! like...
-
-    // //  pre - DH
-    // res.render('main/index', {
-    //   channel_name: channel.get().name,
-    //   search_terms: terms,
-    //   termImageUrls: termImages
-    // });
-
-    //  post - DH
-    res.render('main/indexDH', {
-      channel: channel.get(),
-      search_terms: terms,
-      termImageUrls: termImages
+    thisChannel.getSearchterms().then(function(searchTerms) {
+      // console.log(searchTerms.length);
+      // res.send(terms);
+      res.render('main/indexDH', {
+        channel: thisChannel,
+        search_terms: searchTerms
+      });
     });
-
-
   });
 });
 

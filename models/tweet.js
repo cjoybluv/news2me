@@ -16,11 +16,13 @@ module.exports = function(sequelize, DataTypes) {
     sentiment_negative: DataTypes.STRING,
     search_term: DataTypes.STRING,
     channelId: DataTypes.INTEGER,
-    follower_count: DataTypes.INTEGER
+    follower_count: DataTypes.INTEGER,
+    searchtermId: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
-        models.tweet.belongsTo(models.channel);
+        models.tweet.belongsTo(models.channel),
+        models.tweet.belongsTo(models.searchterm)
       }
     }
   });
