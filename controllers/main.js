@@ -7,9 +7,9 @@ var router = express.Router();
 
 
 router.get("/", function(req, res) {
-  // var defaultChannel = 'presidentElect2016';
+  var defaultChannel = 'presidentElect2016';
   // var defaultChannel = 'earthChanges';
-  var defaultChannel = '@presidentialCandidates';
+  // var defaultChannel = '@presidentialCandidates';
   req.session.currentChannel = defaultChannel;
 
   db.channel.find({
