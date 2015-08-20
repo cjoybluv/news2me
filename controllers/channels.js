@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 var Twitter = require('twitter');
 var async = require('async');
+var sentiment = require('sentiment');
 
 router.get('/', function(req,res){
   db.channel.findAll().then(function(channels){
@@ -89,11 +90,15 @@ router.post('/:id/terms', function(req,res) {
          access_token_secret: process.env.TWITTR_ACCESS_TOKEN_SECRET
 		});
   // res.send(req.body);
+  if (req.body.image_url != '') {
+    var searchtermLoad = {term: req.body.term,image_url: req.body.image_url};
+  } else {
+    var searchtermLoad = {term: req.body.term};
+  }
+  // var image_url = (req.body.image_url != '') ? req.body.image_url : null;
   db.channel.findById(req.params.id).then(function(thisChannel){
-    thisChannel.createSearchterm({
-      term: req.body.term,
-      image_url: req.body.image_url
-    }).then(function(searchterm){
+    thisChannel.createSearchterm(searchtermLoad)
+    .then(function(searchterm){
     	var term = searchterm.term
     	client.get('search/tweets', {'q': term + ' since:2015-01-01', 'count': 30, 'result\_type':'popular'},
         function(error, tweets, response){
@@ -107,6 +112,8 @@ router.post('/:id/terms', function(req,res) {
                 //   	console.log(data);
                 //   })
 
+              var words = {'word':0};
+              var tweetSentiment = sentiment(tweet.text,words);
 
              	db.tweet.findOrCreate({
                       where:{tweet_id:tweet.id.toString(),channelId:req.params.id},
@@ -120,9 +127,13 @@ router.post('/:id/terms', function(req,res) {
                         retweet_count: tweet.retweet_count,
                         favorite_count: tweet.favorite_count,
                         search_term: term,
+                        sentiment_score: tweetSentiment.score,
+                        sentiment_comparative: tweetSentiment.comparative,
+                        sentiment_negative: tweetSentiment.negative.toString(),
+                        sentiment_positive: tweetSentiment.positive.toString(),
                         channelId: req.params.id,
                         follower_count: tweet.user.followers_count,
-                        searchtermId: term.id
+                        searchtermId: searchterm.id
                       }
                     }).spread(function(tweet, created) {
                       console.log('tweet created',tweet);
