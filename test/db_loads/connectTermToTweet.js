@@ -26,7 +26,7 @@ db.searchterm.findAll({
     callback1(null,'something');
   }, function(err) {
     // console.log('done with everything');
-    callback1(err,terms);
+    // callback1(err,terms);
   });
   console.log('after loop');
 });
