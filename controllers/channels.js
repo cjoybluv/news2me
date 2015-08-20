@@ -4,7 +4,14 @@ var router = express.Router();
 var Twitter = require('twitter');
 var async = require('async');
 
+
 router.get('/', function(req,res){
+  // db.channel.findAll().then(function(channels){
+  //   res.render('channels/index',{
+  //     channels: channels
+  //   });
+
+  // });
   db.channel.findAll().then(function(channels){
       // res.send(channels)
       var array = [];
@@ -33,7 +40,10 @@ router.get('/', function(req,res){
       })
       newArray = newArray.slice(0,5)
         // res.send(newArray)
-         res.render('channels/index', {newArray: newArray});
+         res.render('channels/index', {newArray: newArray,
+         channels: channels,
+         currentUser: req.currentUser,
+         currentChannel: req.session.currentChannel});
     });
 });
 
@@ -96,7 +106,7 @@ router.post('/:id/terms', function(req,res) {
              		 //res.send(tweet.user.profile_image_url + 'g')
              		 // db.searchterm.create({
                 //       where:{channelId:req.params.id},
-                //       image_url: tweet.user.profile_image_url + 'g' 
+                //       image_url: tweet.user.profile_image_url + 'g'
                 //   }).then(function(data){
                 //   	console.log(data);
                 //   })
@@ -171,14 +181,23 @@ router.post('/:id/edit', function(req,res) {
   });
 });
 
-router.get('/:channel', function(req, res){
-var nameArray = [];
-for (var key in req.params){
+// channel set on get send to to home
+// router.get('/:id', function(req,res) {
+//   res.redirect('/');
+// });
+
+router.get('/:id', function(req, res){
+  if (req.params.id) {
+    req.session.currentChannel = req.params.id;
+    res.redirect('/');
+  } else {
+  var nameArray = [];
+  for (var key in req.params){
     nameArray.push({
           table: key,
           name: req.params[key]
         });
-}
+  }
 
   db.channel.find({
     where:{
@@ -248,6 +267,7 @@ for (var key in req.params){
 
     });
   });
+}
 })
 
   //    MSHARIF34   GET IMAGE FROM TWITTER FOR DEFAULT IMAGE_URL >> NEEDS IMPLEMENTING
