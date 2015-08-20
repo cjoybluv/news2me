@@ -70,18 +70,73 @@ router.get('/:id/terms/new', function(req, res) {
   }).then(function(thisChannel){
     res.render('channels/newterm',{
       thisChannel: thisChannel
-    });
   });
+    });
 });
 
 // CREATE SEARCHTERM
 router.post('/:id/terms', function(req,res) {
+	 var client = new Twitter({
+         consumer_key: process.env.TWITTR_CONSUMER_KEY,
+         consumer_secret: process.env.TWITTR_CONSUMER_SECRET,
+         access_token_key: process.env.TWITTR_ACCESS_TOKEN_KEY,
+         access_token_secret: process.env.TWITTR_ACCESS_TOKEN_SECRET
+		});
   // res.send(req.body);
   db.channel.findById(req.params.id).then(function(thisChannel){
     thisChannel.createSearchterm({
       term: req.body.term,
       image_url: req.body.image_url
     }).then(function(searchterm){
+    	var term = searchterm.term
+    	client.get('search/tweets', {'q': term + ' since:2015-01-01', 'count': 30, 'result\_type':'popular'},
+        function(error, tweets, response){
+             	//res.send(tweets.statuses)
+             	tweets.statuses.forEach(function(tweet){
+             		 //res.send(tweet.user.profile_image_url + 'g')
+             		 // db.searchterm.create({
+                //       where:{channelId:req.params.id},
+                //       image_url: tweet.user.profile_image_url + 'g' 
+                //   }).then(function(data){
+                //   	console.log(data);
+                //   })
+
+
+             	db.tweet.findOrCreate({
+                      where:{tweet_id:tweet.id.toString(),channelId:req.params.id},
+                      defaults:{
+                        tweet_id: tweet.id.toString(),
+                        tweet_created_at: new Date(tweet.created_at),
+                        tweet_text: tweet.text,
+                        tweet_source: tweet.source,
+                        user_name: tweet.user.name,
+                        user_url: tweet.user.url,
+                        retweet_count: tweet.retweet_count,
+                        favorite_count: tweet.favorite_count,
+                        search_term: term,
+                        channelId: req.params.id,
+                        follower_count: tweet.user.followers_count,
+                        searchtermId: term.id
+                      }
+                    }).spread(function(tweet, created) {
+                      console.log('tweet created',tweet);
+                      if (!created) {
+                        console.log('>>>> FOUND <<<<<<< DO UPDATE',tweet);
+                        tweet.retweet_count = tweet.retweet_count;
+                        tweet.favorite_count = tweet.favorite_count;
+                        tweet.follower_count = tweet.user.followers_count;
+                        tweet.searchtermId = term.id
+                        tweet.save();
+                      }
+                      callback3(null,tweet);
+                    }).catch(function(error) {
+                      console.log('ERROR - creating tweet',error);
+                      callback3('Error - creating tweet',error);
+                    });
+             	})
+
+
+        });
       res.redirect('/channels/'+thisChannel.id+'/terms/new');
     });
   });
