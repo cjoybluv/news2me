@@ -65,7 +65,7 @@ var barGraph = function(dataset){
       d3.select(this)
           .transition()
           .duration(200)
-          .attr("fill-opacity",1)
+          .attr("opacity",1)
       div.transition()
           .duration(200)
           .style("opacity", .8);
@@ -76,7 +76,7 @@ var barGraph = function(dataset){
         d3.select(this)
           .transition()
           .duration(500)
-          .attr('fill-opacity',tempOpacity)
+          .attr('opacity',tempOpacity)
             div.transition()
                 .duration(500)
                 .style("opacity", 0);
@@ -98,7 +98,7 @@ var barGraph = function(dataset){
          return "#00A388";
        }
     })
-     .attr("fill-opacity",function(d){
+     .attr("opacity",function(d){
       if (d.sentiment_score === 0) {
         return .5;
       } else if (d.sentiment_score < 0) {

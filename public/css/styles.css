@@ -53,6 +53,21 @@ form label {
   margin-right: 1em;
 }
 
+form .btn-primary.add-term {
+  margin-top: 1.7em;
+  float: left;
+}
+.input_fields_wrap {
+  margin-bottom: 2em;
+}
+.display-table thead {
+  color: #00473C;
+}
+
+.display-table {
+  margin-left: .5em;
+}
+
 .input-group-addon {
   /*background-color: rgba(0,125,104,.2);*/
   background-color: rgba(255,79,56,.2);
@@ -63,7 +78,8 @@ input[type="email"],
 .input-group-addon {
   border: 1px solid #999;
 }
-form .btn-primary {
+form .btn-primary,
+.btn-primary.glyphicon.glyphicon-pencil {
   background-color: #007D68;
   border: 1px solid #00473C;
   text-align: right;
@@ -242,7 +258,7 @@ div.tooltip {
   position: absolute;
   text-align: center;
   width: 400px;
-  max-height: 120px;
+  max-height: 150px;
   padding: .5em;
   font-size: 1.2em;
   /*background: #BEEB9F;*/
