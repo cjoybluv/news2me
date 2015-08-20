@@ -20,7 +20,7 @@ router.get('/', function(req,res){
 
    db.channel.find({
       where:{
-        name: req.session.currentChannel
+        id: req.session.currentChannel
       }
     }).then(function(channel){
 

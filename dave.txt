@@ -12,6 +12,19 @@ twitter model:
         callback(null,tweet);
       }
     }
+<a href="#" class="btn btn-default remove_field">-</a>
+
+
+<div class="col-md-4"><span><label>Search Term</label><input type="text" class="form-control" placeholder="Search Term (word, @tag, #tag)" name="term"></span></div><div class="col-md-7"><span><label>Term's Image Url (optional)</label><input type="text" class="form-control" placeholder="Image URL for search Term" name="image_url"></span><a href="#" class="btn btn-default remove_field">-</a></div>
+
+
+
+
+
+
+
+
+
 
 
     https://pbs.twimg.com/profile_images/591000793303547905/eu1KYXqx_400x400.jpg

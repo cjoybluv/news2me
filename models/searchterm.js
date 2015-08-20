@@ -3,8 +3,7 @@ module.exports = function(sequelize, DataTypes) {
   var searchterm = sequelize.define('searchterm', {
     term: DataTypes.STRING,
     image_url: DataTypes.TEXT,
-    channelId: DataTypes.INTEGER,
-    order_val: DataTypes.INTEGER
+    channelId: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {

@@ -25,8 +25,13 @@ db.searchterm.findAll({
       callback1(null,term);
     });
   }, function(err) {
+<<<<<<< HEAD
     console.log('done with everything');
     callback1(err,terms);
+=======
+    // console.log('done with everything');
+    // callback1(err,terms);
+>>>>>>> 9a91f405ec73cb22b6ba5002a9139f133b6d6ebd
   });
   console.log('after loop');
 });

@@ -18,10 +18,11 @@ router.post('/login',function(req,res){
       } else if(user) {
         req.session.user = user.id;
         req.flash('info','You are logged in');
+        req.session.currentChannel = user.defaultChannelId;
         res.redirect('/');
       } else {
         req.flash('danger','invalid username or email');
-        res.redirect('/');
+        res.redirect('/auth/login');
       }
     }
   );
@@ -44,13 +45,15 @@ router.post('/signup',function(req,res){
       defaults: {
         email: req.body.email,
         password: req.body.password,
-        name: req.body.name
+        name: req.body.name,
+        defaultChannelId: 1
        }
     }).spread(function(user, created) {
       if(created) {
         req.flash('success','You are signed up');
         req.session.user = user.id;
         req.flash('info','You are logged in');
+        req.session.currentChannel = user.defaultChannelId;
         res.redirect('/');
       } else {
         req.flash('danger','A user with that email already exists.');
@@ -72,6 +75,7 @@ router.post('/signup',function(req,res){
 //logout logged in user
 router.get('/logout',function(req,res){
   req.flash('info','You have been logged out.');
+  req.session.currentChannel = 1;
   req.session.user = false;
   res.redirect('/');
 });

@@ -1,21 +1,57 @@
 var db = require('../models');
 var express = require('express');
-var async = require('async');
 var router = express.Router();
+var Twitter = require('twitter');
+var async = require('async');
 
-// console.log('made it to router')
 
+router.get('/', function(req,res){
+  db.channel.findAll().then(function(channels){
+      // res.send(channels)
+      var array = [];
+      var newArray = []
+      channels.forEach(function(data){
+        array.push(data.name);
+      })
 
-router.get("/", function(req, res) {
-  // var defaultChannel = 'presidentElect2016';
-  // var defaultChannel = 'earthChanges';
-  // var defaultChannel = '@presidentialCandidates';
-  if (!req.session.currentChannel) {
-    req.session.currentChannel = 1;
-  }
+      var counts = {};
+      array.forEach(function(item) {
+        if (counts[item]) {
+          counts[item] += 1;
+        } else {
+          counts[item] = 1;
+        }
+      });
+      for (var key in counts){
+        newArray.push({
+          name: key,
+          count: counts[key]
+        });
+      }
+
+      newArray.sort(function(a,b){
+        return b.count - a.count
+      })
+      newArray = newArray.slice(0,5)
+        // res.send(newArray)
+         res.render('channels/index', {newArray: newArray});
+
+    });
+});
+
+router.get('/:channel', function(req, res){
+var nameArray = [];
+for (var key in req.params){
+    nameArray.push({
+          table: key,
+          name: req.params[key]
+        });
+}
 
   db.channel.find({
-    where:{id:req.session.currentChannel},
+    where:{
+      name: nameArray[0].name
+    },
     include:[db.searchterm]
   }).then(function(thisChannel){
       var channelMetrics = [];
@@ -37,6 +73,7 @@ router.get("/", function(req, res) {
           limit: 15
         }).then(function(tweets){
 
+            // res.send(tweets)
           termMetric.retweet_total = tweets.reduce(function(a,b){
             return a + b.retweet_count;
           },0);
@@ -54,6 +91,7 @@ router.get("/", function(req, res) {
           termMetric.sentiment_avg = sentiment_avg;
           termMetric.tweets = tweets.sort(date_asc);
           var total = channelMetrics.push(termMetric);
+
           // var tweetTotal = topTweets.push(tweets);
           callback1(null,{
             channelMetrics: channelMetrics
@@ -68,7 +106,7 @@ router.get("/", function(req, res) {
         // console.log('done with everything',channelMetrics);
         // res.send(topTweets);
 
-        res.render('main/index', {
+        res.render('popular/index', {
           channel: thisChannel,
           search_terms: searchTerms,
           channelMetrics: metrics
@@ -78,17 +116,7 @@ router.get("/", function(req, res) {
 
     });
   });
-});
-
-//GET /restricted
-//an example restricted page
-router.get('/restricted',function(req,res){
-  if(req.currentUser){
-    res.render('main/restricted');
-  } else {
-    res.redirect('/');
-  }
-});
+})
 
 function retweet_sort(a,b) {
   if (a.retweet_total < b.retweet_total)
@@ -105,5 +133,6 @@ function date_asc(a,b) {
     return 1;
   return 0;
 }
+
 
 module.exports = router;

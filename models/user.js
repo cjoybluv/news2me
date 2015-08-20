@@ -17,11 +17,12 @@ module.exports = function(sequelize, DataTypes) {
         notEmpty: true
       }
     },
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
+    defaultChannelId: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        models.user.hasMany(models.channel)
       },
       authenticate: function(email,password,callback) {
         // console.log(email,password,callback);
