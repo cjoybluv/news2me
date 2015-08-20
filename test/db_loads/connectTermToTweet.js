@@ -26,12 +26,21 @@ db.searchterm.findAll({
     });
   }, function(err) {
 <<<<<<< HEAD
+<<<<<<< HEAD
     console.log('done with everything');
     callback1(err,terms);
 =======
     // console.log('done with everything');
     // callback1(err,terms);
 >>>>>>> 9a91f405ec73cb22b6ba5002a9139f133b6d6ebd
+=======
+    // console.log('done with everything');
+    // callback1(err,terms);
+=======
+    console.log('done with everything');
+    callback1(err,terms);
+>>>>>>> cherylafitz-master
+>>>>>>> d47ff55a8774fe5e13c387adcd07adc0f34dfa17
   });
   console.log('after loop');
 });
