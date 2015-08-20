@@ -102,8 +102,8 @@ router.get('/', function(req,res){
                 console.log('after loop');
 
               });
-             res.send(result);
-
+             // res.send(result);
+             res.redirect('/');
              });
             console.log("DONE WITH EVERYTHING");
          });

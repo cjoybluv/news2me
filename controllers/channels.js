@@ -4,9 +4,28 @@ var router = express.Router();
 var Twitter = require('twitter');
 var async = require('async');
 
+// channel list all
 router.get('/', function(req, res) {
-  res.render('channels/index')
+  db.channel.findAll().then(function(channels){
+    res.render('channels/index',{
+      channels: channels
+    });
+
+  });
 });
+
+
+router.get('/:id/terms/:termId', function(req,res) {
+  res.send(req.params);
+});
+
+
+// channel set on get send to to home
+router.get('/:id', function(req,res) {
+  req.session.currentChannel = req.params.id;
+  res.redirect('/');
+});
+
 
 // ENTER NEW CHANNEL
 router.get('/new', function(req, res) {

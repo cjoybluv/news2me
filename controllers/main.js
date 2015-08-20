@@ -28,13 +28,15 @@ router.get("/", function(req, res) {
       async.map(searchTerms,function(term,callback1){
         // do something asynchronous here
         var termMetric = {};
+        termMetric.id = term.id;
         termMetric.term = term.term;
         termMetric.image_url = term.image_url;
 
         db.tweet.findAll({
           where:{search_term: term.term},
           order:[['tweet_created_at','DESC']],
-          limit: 15
+          limit: 15,
+          include:[db.searchterm]
         }).then(function(tweets){
 
           termMetric.retweet_total = tweets.reduce(function(a,b){
