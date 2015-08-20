@@ -68,7 +68,7 @@ router.get("/", function(req, res) {
         // console.log('done with everything',channelMetrics);
         // res.send(topTweets);
 
-        res.render('main/indexDH', {
+        res.render('main/index', {
           channel: thisChannel,
           search_terms: searchTerms,
           channelMetrics: metrics
