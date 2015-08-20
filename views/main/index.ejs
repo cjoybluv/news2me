@@ -1,29 +1,73 @@
-<h2>Channel: <%= channel_name %></h2>
 
-  <ul class="search-items">
-
-    <% search_terms.forEach(function(term) { %>
-    <div class="col-md-3 col-lg-3 search-item">
-      <li>
-      <% var last_name = term.split(' ') %>
-
-      <div class="headshot"><img class="<%= last_name[1].replace("'","").toLowerCase() %>" src="#">
-      </div>
-      <h4><%= term %></h4>
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          NEGATIVE-TO-POSITIVE GRAPH
-        </div>
-      </div>
-      <div class="row">
-        <div class="tweet-num">Mentions: -number- <%= %></div>
-      </div>
-      </li>
+<h2>Channel: <%= channel.name %></h2>
+    <% var metrics = channelMetrics %>
+    <% var firstTerm = channelMetrics.shift() %>
+<div class="trending-leaderboard">
+  <div class="row leaderboard-header">
+      <div class="col-md-12 col-lg-12">
+      <h4 class="stats"><div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      tweets: <span class="trending-leader"><%= firstTerm.tweets.length %></span> </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">retweets:<span class="trending-leader"> <%= firstTerm.retweet_total %></span></div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">favorites:<span class="trending-leader"> <%= firstTerm.favorite_total %></span></div>
+        <% if (firstTerm.sentiment_avg === 0) { %>
+          <% firstTerm.sentiment_avg = "neutral"; %>
+        <% } %>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">average sentiment:<span class="trending-leader sentiment"> <%= firstTerm.sentiment_avg %></span></div>
+        </h4>
     </div>
-    <% }); %>
+    <div class="col-md-12 col-lg-12">
+      <h3><span class="leaderImage termImage img-responsive"><img src="<%= firstTerm.image_url %>"></span>Most viral: <span class="trending-leader"><%= firstTerm.term %></span></h3>
+    </div>
+  </div>
+  <div class="before-tweet-list">
+  </div>
+</div>
+<div class="row">
+  <ul class="search-items">
+    <% channelMetrics.forEach(function(term,idx) { %>
+      <div class="col-md-4 col-lg-4 search-item">
+        <li>
+        <h4><%= term.term %></h4>
+        <div class="termImage img-responsive"><img src="<%= term.image_url %>"></div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Retweet Total</th>
+                <th>Favorite Total</th>
+                <th>Sentiment Avg</th>
+                <th>Tweet Count</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= term.retweet_total %></td>
+                <td><%= term.favorite_total %></td>
 
+
+                <td><%= term.sentiment_avg %></td>
+                <td><%= term.tweets.length %></td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        </li>
+      </div>
+    <% }); %>
   </ul>
+</div>
+
+  <% channelMetrics.unshift(firstTerm); %>
 
 <script type="text/javascript">
-  var search_terms = "<%- search_terms %>";
+  var twitter_result = <%- JSON.stringify(firstTerm) %>;
+  // var metrics = <%- channelMetrics %>;
+
 </script>
+
+
+<div class="well">
+  channelMetrics:  <%= JSON.stringify(channelMetrics) %>
+</div>

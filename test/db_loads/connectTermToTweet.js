@@ -10,7 +10,7 @@ db.searchterm.findAll({
 
   async.eachSeries(terms,function(term,callback1){
     // do something asynchronous here
-
+    console.log('callback1 before',callback1);
     db.tweet.findAll({
       where:{search_term: term.term}
     }).then(function(tweets){
@@ -22,11 +22,16 @@ db.searchterm.findAll({
         console.log('tweet save err',err);
         callback2(err,tweet);
       });
+      callback1(null,term);
     });
-    callback1(null,'something');
   }, function(err) {
+<<<<<<< HEAD
+    console.log('done with everything');
+    callback1(err,terms);
+=======
     // console.log('done with everything');
     // callback1(err,terms);
+>>>>>>> 9a91f405ec73cb22b6ba5002a9139f133b6d6ebd
   });
   console.log('after loop');
 });
