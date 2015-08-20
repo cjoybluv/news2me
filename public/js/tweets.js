@@ -4,7 +4,6 @@ $(function(){
  var h = 300;
  var barPadding = 2;
  var svg = d3.select(".before-tweet-list").append("svg").attr("width",w).attr("height",h);
- var search_terms;
 
  var colors = d3.scale.linear()
     .domain([0,468])
@@ -19,12 +18,7 @@ $(function(){
 var div = d3.select(".before-tweet-list").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
- // console.log(twitter_result);
-
-
- // twitter_result.forEach(function(person) {
    var array = []
-   // console.log(person)
    terms_searched[twitter_result.term] = array;
    twitter_result.tweets.forEach(function(tweet) {
        array.push({retweet_count: tweet.retweet_count,
@@ -33,11 +27,7 @@ var div = d3.select(".before-tweet-list").append("div")
        text: tweet.tweet_text,
        url: 'url'
      });
-   // });
-
-   // i++;
    });
- // });
  dataset = terms_searched[twitter_result.term];
    console.log("terms_searched",terms_searched)
 
@@ -72,17 +62,10 @@ var barGraph = function(dataset){
      return h;
     }).on("mouseover", function(d){
       tempOpacity = d3.select(this).attr('opacity');
-      // if (d.sentiment_score === 0) {
-      //   return 1;
-      //   d3.select(this)
-      //     .transition()
-      //     .duration(200)
-      //     .attr("fill","#ffffff")
-      // }
       d3.select(this)
           .transition()
           .duration(200)
-          .attr("opacity",1)
+          .attr("fill-opacity",1)
       div.transition()
           .duration(200)
           .style("opacity", .8);
@@ -93,7 +76,7 @@ var barGraph = function(dataset){
         d3.select(this)
           .transition()
           .duration(500)
-          .attr('opacity',tempOpacity)
+          .attr('fill-opacity',tempOpacity)
             div.transition()
                 .duration(500)
                 .style("opacity", 0);
@@ -109,13 +92,13 @@ var barGraph = function(dataset){
       if(d.sentiment_score === 0) {
         return "transparent";
       }
-       else if (d.sentiment_score < 2) {
+       else if (d.sentiment_score < 0) {
          return "#FF6138";
        } else {
          return "#00A388";
        }
     })
-     .attr("opacity",function(d){
+     .attr("fill-opacity",function(d){
       if (d.sentiment_score === 0) {
         return .5;
       } else if (d.sentiment_score < 0) {

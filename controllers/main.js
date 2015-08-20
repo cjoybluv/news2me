@@ -29,6 +29,7 @@ router.get("/", function(req, res) {
         // do something asynchronous here
         var termMetric = {};
         termMetric.term = term.term;
+        termMetric.id = term.id;
         termMetric.image_url = term.image_url;
 
         db.tweet.findAll({
@@ -55,6 +56,7 @@ router.get("/", function(req, res) {
           termMetric.tweets = tweets.sort(date_asc);
           var total = channelMetrics.push(termMetric);
           // var tweetTotal = topTweets.push(tweets);
+          // console.log(another)
           callback1(null,{
             channelMetrics: channelMetrics
             // topTweets: topTweets
@@ -63,6 +65,7 @@ router.get("/", function(req, res) {
       }, function(err,results) {
         var channelMetrics = results[0].channelMetrics;
         var metrics = channelMetrics.sort(retweet_sort);
+
         // var topTweets = results[0].topTweets;
 
         // console.log('done with everything',channelMetrics);
@@ -91,19 +94,27 @@ router.get('/restricted',function(req,res){
 });
 
 function retweet_sort(a,b) {
-  if (a.retweet_total < b.retweet_total)
+  if (a.retweet_total < b.retweet_total) {
     return 1;
-  if (a.retweet_total > b.retweet_total)
+  }
+  else if (a.retweet_total > b.retweet_total) {
     return -1;
-  return 0;
+  }
+  else {
+    return 0;
+  }
 }
 
 function date_asc(a,b) {
-  if (a.tweet_created_at < b.tweet_created_at)
+  if (a.tweet_created_at < b.tweet_created_at) {
     return -1;
-  if(a.tweet_created_at > b.tweet_created_at)
+  }
+  else if(a.tweet_created_at > b.tweet_created_at) {
     return 1;
-  return 0;
+  }
+  else {
+    return 0;
+  }
 }
 
 module.exports = router;

@@ -1,18 +1,47 @@
 
 <h2>Channel: <%= channel.name %></h2>
     <% var metrics = channelMetrics %>
+<script type="text/javascript">
+$(function() {
+    var metrics = <%- JSON.stringify(channelMetrics) %>;
+    $(".search-items").on('click', '.search-item', function(metrics){
+      var currentId = $(this).attr('id');
+
+      // console.log(this);
+    })
+
+
+    $.ajax({
+      url: "/",
+      method: "GET",
+      // dataType: "json"
+      // data: {'metrics': channelMetrics}
+    }).done(function(data) {
+      console.log("this is my data",JSON.parse(data));
+    });
+  // end
+  });
+</script>
+
+
     <% var firstTerm = channelMetrics.shift() %>
 <div class="trending-leaderboard">
   <div class="row leaderboard-header">
       <div class="col-md-12 col-lg-12">
-      <h4 class="stats"><div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <h4 class="stats"><div class="col-md-2 col-lg-2 stats-title">Viral Tweet Stats:</div>
+
+      <div class="col-md-2 col-lg-2">
       tweets: <span class="trending-leader"><%= firstTerm.tweets.length %></span> </div>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">retweets:<span class="trending-leader"> <%= firstTerm.retweet_total %></span></div>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">favorites:<span class="trending-leader"> <%= firstTerm.favorite_total %></span></div>
+        <div class="col-md-2 col-lg-2">retweets:<span class="trending-leader"> <%= firstTerm.retweet_total %></span></div>
+        <div class="col-md-3 col-lg-3">favorites:<span class="trending-leader"> <%= firstTerm.favorite_total %></span></div>
         <% if (firstTerm.sentiment_avg === 0) { %>
           <% firstTerm.sentiment_avg = "neutral"; %>
         <% } %>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">average sentiment:<span class="trending-leader sentiment"> <%= firstTerm.sentiment_avg %></span></div>
+        <div class="col-md-3 col-lg-3">average sentiment:<span class="trending-leader sentiment"> <%= firstTerm.sentiment_avg %></span></div>
+        <span class="negKeyColor"></span><span class="negKey">negative tweet</span></br>
+        <span class="neuKeyColor"></span><span class="neuKey">neutral tweet</span></br>
+        <span class="posKeyColor"></span><span class="posKey">positive tweet</span></br>
+        <!-- <em>Hover over bars to view viral tweet.</em> -->
         </h4>
     </div>
     <div class="col-md-12 col-lg-12">
@@ -25,7 +54,7 @@
 <div class="row">
   <ul class="search-items">
     <% channelMetrics.forEach(function(term,idx) { %>
-      <div class="col-md-4 col-lg-4 search-item">
+      <div class="col-md-4 col-lg-4 search-item" id="term<%= term.id %>">
         <li>
         <h4><%= term.term %></h4>
         <div class="termImage img-responsive"><img src="<%= term.image_url %>"></div>
@@ -63,7 +92,6 @@
 
 <script type="text/javascript">
   var twitter_result = <%- JSON.stringify(firstTerm) %>;
-  // var metrics = <%- channelMetrics %>;
 
 </script>
 

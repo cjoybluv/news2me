@@ -39,6 +39,7 @@ router.get('/signup',function(req,res){
 router.post('/signup',function(req,res){
   if (req.body.password != req.body.password2) {
     req.flash('danger','passwords not matching');
+    res.redirect('/auth/signup');
   } else {
     db.user.findOrCreate({
       where: {email: req.body.email},

@@ -3,18 +3,7 @@
 <head>
   <title>News to Me</title>
   <!-- Latest compiled and minified CSS & JS -->
-<<<<<<< HEAD
-  <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<<<<<<< HEAD
-=======
-  <script src="//code.jquery.com/jquery.js"></script>
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-  <!-- Latest compiled and minified CSS & JS -->
   <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
->>>>>>> 9a91f405ec73cb22b6ba5002a9139f133b6d6ebd
-=======
-  <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
->>>>>>> d47ff55a8774fe5e13c387adcd07adc0f34dfa17
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="/css/styles.css">
   <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
@@ -40,14 +29,16 @@
       </button>
       <a class="navbar-brand" href="/">News to Me</a>
     </div>
-
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-      <li><a href="/d3"><i class="fa fa-home"></i></a></li>
+      <li><a href="/"><i class="fa fa-home"></i></a></li>
       <li><a href="/d3">About</a></li>
-              <li><a href="/twitter">Twitter Dev</a></li>
-              <li><a href="/d3">D3 Dev</a></li>
+      <li><a href="/channels">Channels</a></li>
+      <li><a href="/channels/new" title="Create a new channel"><span class="glyphicon glyphicon-plus"></span></a></li>
+
+              <!-- <li><a href="/twitter">Twitter Dev</a></li> -->
+              <!-- <li><a href="/d3">D3 Dev</a></li> -->
 <!--         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -69,13 +60,11 @@
       </form> -->
       <ul class="nav navbar-nav navbar-right">
         <% if(currentUser) { %>
-          <li><a href="/channels">Channels</a></li>
           <li class="navbar-text">You are logged in as <b><%= typeof currentUser.email === 'string' ? currentUser.email : 'Unknown' %></b>.</li>
           <li><a href="/auth/logout">Logout</a></li>
         <% }else{ %>
           <li><a href="/auth/login">Login</a></li>
           <li><a href="/auth/signup">Signup</a></li>
-
         <% } %>
 <!--         <li><a href="#">Link</a></li> -->
 <!--         <li class="dropdown">
@@ -92,16 +81,10 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
 <div class="container">
-
-
-
+ <% include partials/alerts %>
   <!-- <a href="/restricted" class="btn btn-danger">Go to restricted page</a> -->
-
   <%- body %>
-
 </div>
-
 </body>
 </html>

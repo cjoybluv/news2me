@@ -45,6 +45,70 @@ body {
   stroke-width: 1.5px;
 }
 
+.glyphicon-pencil {
+  margin-left: 1em;
+}
+
+form label {
+  margin-right: 1em;
+}
+
+.input-group-addon {
+  /*background-color: rgba(0,125,104,.2);*/
+  background-color: rgba(255,79,56,.2);
+}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+.input-group-addon {
+  border: 1px solid #999;
+}
+form .btn-primary {
+  background-color: #007D68;
+  border: 1px solid #00473C;
+  text-align: right;
+  transition: background-color .5s;
+  float: right;
+}
+
+form .btn-primary:hover {
+  background-color: #00473C;
+}
+
+.negKeyColor,
+.neuKeyColor,
+.posKeyColor {
+  width: 2em;
+  height: 1em;
+  border: 1px solid rgba(0,0,0,.6);
+  float: right;
+  clear: right;
+  margin: .5em 2em 0 1em;
+}
+.negKey,
+.neuKey,
+.posKey {
+  float: right;
+  margin: .5em 0em 0 1em;
+}
+.negKey {
+  margin-top: 1em;
+}
+.negKeyColor {
+  background-color: #FF6138;
+  margin-top: 1em;
+}
+
+.neuKeyColor {
+  background-color: #fff;
+}
+
+.posKeyColor {
+  background-color: #00A388;
+}
+
+
+
 h1, h2, h3 {
  /*color: #e6e6e6 ;*/
  font-weight: normal;
@@ -139,6 +203,9 @@ h4 {
 
 .stats {
   text-align: center;
+}
+.stats-title {
+  font-weight: bold;
 }
 
 /* D3 styles --> */
