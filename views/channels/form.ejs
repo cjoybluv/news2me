@@ -8,17 +8,17 @@
   <% if(action === 'Edit') { %>
     <% actionRoute = "/channels/" + thisChannel.id + "/edit"; %>
   <% } %>
-  <form class="form-horiztontal" method="post" action="<%= actionRoute %>">
+  <form class="form-inline" method="post" action="<%= actionRoute %>">
     <!-- <div class="form-group"> -->
     <% var channelName = ''; %>
     <% if(thisChannel) { %>
       <% channelName = thisChannel.name %>
     <% } %>
-      <div class="input-group">
-      <label>Channel Name</label>
-        <input type="text" class="form-control" placeholder="Channel Name (i.e.  Sports)" value="<%= channelName %>"  name="name">
-      </div>
+      <!-- <div class="input-group"> -->
+        <label>Channel Name</label>
+        <input type="text" class="form-control" placeholder="Channel Name (i.e.  Sports)" value="<%= channelName %>"  name="name" autofocus>
     <!-- </div> -->
       <button type="submit" class="btn btn-primary">Next</button>
+      <!-- </div> -->
   </form>
 </div>

@@ -1,17 +1,30 @@
+<script>
+$(function() {
+    var metrics = <%- JSON.stringify(channelMetrics) %>;
+    updateTermInfo(metrics[0]);
+  })
+
+</script>
+
 <h2>Channel: <%= channel.name %></h2>
     <% var firstTerm = channelMetrics.shift() %>
 <div class="trending-leaderboard">
   <div class="row leaderboard-header">
       <div class="col-md-12 col-lg-12">
-      <h4 class="stats"><div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 stats-title">Viral Tweet Stats:</div>
-      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      <h4 class="stats"><div class="col-md-2 col-lg-2 stats-title">Viral Tweet Stats:</div>
+
+      <div class="col-md-2 col-lg-2">
       tweets: <span class="trending-leader"><%= firstTerm.tweets.length %></span> </div>
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">retweets:<span class="trending-leader"> <%= firstTerm.retweet_total %></span></div>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">favorites:<span class="trending-leader"> <%= firstTerm.favorite_total %></span></div>
+        <div class="col-md-2 col-lg-2">retweets:<span class="trending-leader"> <%= firstTerm.retweet_total %></span></div>
+        <div class="col-md-3 col-lg-3">favorites:<span class="trending-leader"> <%= firstTerm.favorite_total %></span></div>
         <% if (firstTerm.sentiment_avg === 0) { %>
           <% firstTerm.sentiment_avg = "neutral"; %>
         <% } %>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">average sentiment:<span class="trending-leader sentiment"> <%= firstTerm.sentiment_avg %></span></div>
+        <div class="col-md-3 col-lg-3">average sentiment:<span class="trending-leader sentiment"> <%= firstTerm.sentiment_avg %></span></div>
+        <span class="negKeyColor"></span><span class="negKey">negative tweet</span></br>
+        <span class="neuKeyColor"></span><span class="neuKey">neutral tweet</span></br>
+        <span class="posKeyColor"></span><span class="posKey">positive tweet</span></br>
+        <!-- <em>Hover over bars to view viral tweet.</em> -->
         </h4>
     </div>
     <div class="col-md-12 col-lg-12">

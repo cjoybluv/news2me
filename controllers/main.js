@@ -95,6 +95,10 @@ router.get("/", function(req, res) {
   });
 });
 
+router.get('/about', function(req,res){
+  res.render('main/about');
+})
+
 //GET /restricted
 //an example restricted page
 router.get('/restricted',function(req,res){
