@@ -32,7 +32,8 @@
         <tr>
           <td><%= term.term %></td>
           <td><%= term.image_url %></td>
-          <td><a href="#" class="glyphicon glyphicon-trash" id="deleteTerm"></a></td>
+          <!-- DH 8/20 13:45 SETUP FOR DELETE ROUTE -->
+          <td><a href="/channels/<%= thisChannel.id %>/terms/<%= term.id %>/delete" class="glyphicon glyphicon-trash" id="deleteTerm"></a></td>
         </tr>
       <% }) %>
       </tbody>

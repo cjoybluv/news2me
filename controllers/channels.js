@@ -10,21 +10,27 @@ router.get('/', function(req,res){
       var array = [];
       var newArray = []
       channels.forEach(function(data){
-        array.push(data.name);
+        // dh push full channel rec so se have id
+        array.push(data);
       })
 
-      var counts = {};
+      var counts = {}, ids = {};
       array.forEach(function(item) {
         if (counts[item]) {
-          counts[item] += 1;
+          counts[item.name] += 1;
         } else {
-          counts[item] = 1;
+          counts[item.name] = 1;
+          // build parallel object to counts to hold 1st Id of each unique channel.name
+          ids[item.name] = item.id;
         }
       });
+
+      // DH 8/20 1:24P pass channel.id for deleteBtn
       for (var key in counts){
         newArray.push({
           name: key,
-          count: counts[key],
+          id: ids[key],
+          count: counts[key]
         });
       }
 
@@ -96,7 +102,7 @@ router.post('/:id/terms', function(req,res) {
              		 //res.send(tweet.user.profile_image_url + 'g')
              		 // db.searchterm.create({
                 //       where:{channelId:req.params.id},
-                //       image_url: tweet.user.profile_image_url + 'g' 
+                //       image_url: tweet.user.profile_image_url + 'g'
                 //   }).then(function(data){
                 //   	console.log(data);
                 //   })
@@ -170,6 +176,16 @@ router.post('/:id/edit', function(req,res) {
     res.redirect('/channels/'+thisChannel.id+'/terms/new');
   });
 });
+
+// DELETE SEARCHTERM
+router.get('/:id/terms/:termId/delete', function(req,res) {
+  db.searchterm.destroy({
+    where:{id:req.params.termId}
+  }).then(function(result){
+    // search term detroyed
+    res.redirect('/channels/'+req.params.id+'/terms/new');
+  });
+})
 
 router.get('/:channel', function(req, res){
 var nameArray = [];
