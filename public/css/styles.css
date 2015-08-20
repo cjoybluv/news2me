@@ -105,12 +105,14 @@ h4 {
 
 .termImage img {
  /*margin-right: 1em;*/
- width: 100px;
+ width: 150px;
+ height: 150px;
  border: 1px solid #000;
  display: block;
  margin: 0 auto 1em;
  border: 1px solid #000;
- border-radius: 50%;
+ /*border-radius: 50%;*/
+ border-radius: 10%;
 }
 
 .leaderImage.termImage img {

@@ -46,8 +46,18 @@ router.get("/", function(req, res) {
           var sentiment_avg = tweets.reduce(function(a,b){
                return a + b.sentiment_score;
           },0);
-          if(tweets.length) {
-            sentiment_avg = parseInt(sentiment_avg/tweets.length);
+          if (tweets.length) {
+            var nonZeroCnt = 0;
+            for(var i = 0;i<tweets.length;i++) {
+              if (tweets[i].sentiment_score != 0) {
+                nonZeroCnt +=1;
+              }
+            }
+            if (nonZeroCnt != 0) {
+              sentiment_avg = parseInt(sentiment_avg/nonZeroCnt);
+            } else {
+              sentiment_avg = 0;
+            }
           }else{
             sentiment_avg = 0;
           }
