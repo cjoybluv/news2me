@@ -185,14 +185,12 @@ h4 {
 
 .termImage img {
  /*margin-right: 1em;*/
- width: 150px;
- height: 150px;
+ width: 100px;
  border: 1px solid #000;
  display: block;
  margin: 0 auto 1em;
  border: 1px solid #000;
- /*border-radius: 50%;*/
- border-radius: 10%;
+ border-radius: 50%;
 }
 
 .leaderImage.termImage img {
@@ -275,3 +273,4 @@ div.tooltip {
 div.tooltip i {
   color: #59adeb;
 }
+
