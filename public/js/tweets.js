@@ -10,7 +10,7 @@ function updateTermInfo(twitter_result){
 
   var dataset = [];
   var w = .8 * ($(window).width());
-  var h = 300;
+  var h = 270;
   var barPadding = 2;
   var svg = d3.select(".before-tweet-list").append("svg").attr("width",w).attr("height",h);
 
@@ -85,7 +85,7 @@ function updateTermInfo(twitter_result){
               .style("opacity", 0);
           })
           .transition()
-          .delay(200)
+          .delay(170)
           .duration(3000)
           .attr("width", xScale.rangeBand())
           .attr("height", function(d){
@@ -128,7 +128,7 @@ function updateTermInfo(twitter_result){
         return "number" + i
       })
       .transition()
-        .delay(200)
+        .delay(170)
         .duration(3000)
       .attr("y", function(d) {
            return h - yScale(d.retweet_count) - 5;
