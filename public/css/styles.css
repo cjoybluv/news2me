@@ -2,7 +2,7 @@ body {
   font-family: 'Arimo', sans-serif;
   font-family: 'Oxygen', sans-serif;
  /*background-color: #444;*/
- background-image: url('../images/congruent_pentagon_faded.png')
+ background-image: url('../images/congruent_pentagon_faded.png');
 }
 
 .mynav {
@@ -66,6 +66,7 @@ form .btn-primary.add-term {
 
 .display-table {
   margin-left: .5em;
+  max-width: 80%;
 }
 
 .input-group-addon {
@@ -106,13 +107,14 @@ form .btn-primary:hover {
 .posKey {
   float: right;
   margin: .5em 0em 0 1em;
+  font-size: .9em;
 }
 .negKey {
-  margin-top: 1em;
+  margin-top: 1.5em;
 }
 .negKeyColor {
   background-color: #FF6138;
-  margin-top: 1em;
+  margin-top: 1.5em;
 }
 
 .neuKeyColor {
@@ -139,10 +141,12 @@ h3 {
 
 ul.search-items {
  padding: 0;
-}.
+}
 
 .well {
- opacity: .8;
+ opacity: .7;
+ /*border: 1px solid rgba(255,97,56,.5);*/
+ border: 1px solid #79BD8F;
 }
 
 .search-item li {
@@ -186,18 +190,22 @@ h4 {
 .termImage img {
  /*margin-right: 1em;*/
  width: 120px;
+ height: 120px;
  border: 1px solid #000;
  display: block;
  margin: 0 auto 1em;
  border: 1px solid #000;
  border-radius: 50%;
- /*border-radius: 10%;*/
 }
 
 .leaderImage.termImage img {
   /*float: left;*/
   /*margin-right: 1em;*/
   /*border-radius: 0;*/
+}
+
+.pop-channel {
+  margin-top: .5em;
 }
 
 /* FORM styles --> */
@@ -210,12 +218,16 @@ h4 {
 }
 
 .leaderboard-header div h3 {
-  /*border-bottom: 1px solid rgba(0,0,0,.6);*/
+  margin-bottom: 1em;
 }
 .trending-leaderboard {
    border: 2px solid rgba(0,0,0,.6);
    margin-bottom: 1em;
    background-color:  rgba(255,255,255,.5)
+}
+
+.trending-leaderboard .termImage img {
+  margin-top: -3.5em;
 }
 
 .stats {
@@ -274,3 +286,4 @@ div.tooltip {
 div.tooltip i {
   color: #59adeb;
 }
+

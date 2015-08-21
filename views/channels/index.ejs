@@ -1,36 +1,40 @@
-<!-- <nav class="navbar navbar-default mynav">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/">News to Me</a>
-    </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-              <li><a href="/twitter">Twitter Dev</a></li>
-              <li><a href="/d3">D3 Dev</a></li>
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Popular Channels <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-          </ul>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <% if(currentUser) { %>
-          <li class="navbar-text">You are logged in as <b><%= typeof currentUser.email === 'string' ? currentUser.email : 'Unknown' %></b>.</li>
-          <li><a href="/auth/logout">Logout</a></li>
-        <% }else{ %>
-          <li><a href="/auth/login">Login</a></li>
-          <li><a href="/auth/signup">Signup</a></li>
-        <% } %>
-      </ul>
-    </div><!-- /.navbar-collapse -->
- <!--  </div>/.container-fluid
-</nav> -->
-
-
-<h1>Top 5 Popular Channels</h1>
-<% newArray.forEach(function(result, index){ %>
-  <div class="well">
-    <a href="/popular/<%= result.name %>">  <%= index + 1 %>.  <%= result.name %></a><a href="channels/<%= result.id %>/edit"><span class="btn btn-sm btn-primary glyphicon glyphicon-pencil"></span></a>
+<h1>Channels</h1>
+<hr>
+<div class="col-sm-3 col-md-3 col-lg-3 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+  <div class="well favs">
+    <h4>Most Popular</h4>
+    <% newArray.forEach(function(result, index){ %>
+      <div class="row">
+        <div class="pop-channel col-md-12 col-lg-12">
+          <a href="/popular/<%= result.name %>">  <%= index + 1 %>.  <%= result.name %></a>
+        </div>
+      </div>
+    <% }) %>
   </div>
-<% }) %>
+</div>
+
+<div class="col-sm-7 col-md-7 col-lg-7">
+
+  <% channels.forEach(function(channel) { %>
+    <div class="well">
+    <div class="row">
+    <div class="col-md-2 col-lg-2">
+    <% if (channel.id == currentChannel) { %>
+      <h4><span class="label label-info">current</span></h4>
+    <% } else { %>
+      <a class="btn btn-success btn-md" href="/channels/<%= channel.id %>">Set</a>
+    <% } %>
+    </div>
+    <div class="col-md-6 col-lg-6">
+
+      <h4><%= channel.name %></h4>
+    </div>
+    <div class="col-md-4 col-lg-4">
+      <% if (channel.userId === currentUser.id) { %>
+      <a href="channels/<%= channel.id %>/edit"><span class="btn btn-sm btn-primary glyphicon glyphicon-pencil"></span></a>
+      <% } %>
+    </div>
+    </div>
+    </div>
+  <% }) %>
+</div>

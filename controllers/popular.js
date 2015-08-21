@@ -56,6 +56,7 @@ for (var key in req.params){
   }).then(function(thisChannel){
       var channelMetrics = [];
       var topTweets = [];
+      req.session.currentChannel = thisChannel.id;
 
       thisChannel.getSearchterms().then(function(searchTerms) {
 

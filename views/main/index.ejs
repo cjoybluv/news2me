@@ -1,25 +1,12 @@
-<h2>Channel: <%= channel.name %></h2>
+<h2>Current Channel: <%= channel.name %></h2>
     <% var metrics = channelMetrics %>
 <script type="text/javascript">
 $(function() {
     var metrics = <%- JSON.stringify(channelMetrics) %>;
-    $(".search-items").on('click', '.search-item', function(metrics){
-      var currentId = $(this).attr('id');
+    updateTermInfo(metrics[0]);
 
-      // console.log(this);
-    })
+  })
 
-
-    $.ajax({
-      url: "/",
-      method: "GET",
-      // dataType: "json"
-      // data: {'metrics': channelMetrics}
-    }).done(function(data) {
-      console.log("this is my data",JSON.parse(data));
-    });
-  // end
-  });
 </script>
 
 
@@ -94,7 +81,7 @@ $(function() {
 
 </script>
 
-
 <div class="well">
   channelMetrics:  <%= JSON.stringify(channelMetrics) %>
 </div>
+
