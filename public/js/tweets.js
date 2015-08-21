@@ -4,13 +4,13 @@ function updateTermInfo(twitter_result){
 
   //TODO: clear old graph
 
-
+  console.log(twitter_result);
 
   //... code from existing tweets.js
 
   var dataset = [];
   var w = .8 * ($(window).width());
-  var h = 300;
+  var h = 270;
   var barPadding = 2;
   var svg = d3.select(".before-tweet-list").append("svg").attr("width",w).attr("height",h);
 
@@ -50,7 +50,7 @@ function updateTermInfo(twitter_result){
 
   var xScale = d3.scale.ordinal()
           .domain(d3.range(0,dataset.length))
-          .rangeBands([0, w])
+          .rangeBands([0, w - 15])
 
   var barGraph = function(dataset){
    svg.selectAll("rect")
@@ -84,36 +84,36 @@ function updateTermInfo(twitter_result){
               .duration(500)
               .style("opacity", 0);
           })
-    .transition()
-    .delay(200)
-    .duration(3000)
-    .attr("width", xScale.rangeBand())
-    .attr("height", function(d){
-     return yScale(4);
-    })
-    .attr("fill", function(d){
-      if(d.sentiment_score === 0) {
-        return "transparent";
-      }
-       else if (d.sentiment_score < 0) {
-         return "#FF6138";
-       } else {
-         return "#00A388";
-       }
-    })
-     .attr("opacity",function(d){
-      if (d.sentiment_score === 0) {
-        return .5;
-      } else if (d.sentiment_score < 0) {
-         return (Math.abs(d.sentiment_score) + 4) * .1;
-      } else {
-         return (d.sentiment_score + 4) * .1;
-      }})
-     .attr("height", function(d,i){
-       return yScale(d.retweet_count);})
-     .attr("y", function(d,i){
-       return h - yScale(d.retweet_count);})
-     .attr("stroke","#333");
+          .transition()
+          .delay(170)
+          .duration(3000)
+          .attr("width", xScale.rangeBand())
+          .attr("height", function(d){
+           return yScale(4);
+          })
+          .attr("fill", function(d){
+            if(d.sentiment_score === 0) {
+              return "transparent";
+            }
+             else if (d.sentiment_score < 0) {
+               return "#FF6138";
+             } else {
+               return "#00A388";
+             }
+          })
+           .attr("opacity",function(d){
+            if (d.sentiment_score === 0) {
+              return .5;
+            } else if (d.sentiment_score < 0) {
+               return (Math.abs(d.sentiment_score) + 4) * .1;
+            } else {
+               return (d.sentiment_score + 4) * .1;
+            }})
+           .attr("height", function(d,i){
+             return yScale(d.retweet_count);})
+           .attr("y", function(d,i){
+             return h - yScale(d.retweet_count);})
+           .attr("stroke","#333");
 
      svg.selectAll("text")
       .data(dataset)
@@ -128,7 +128,7 @@ function updateTermInfo(twitter_result){
         return "number" + i
       })
       .transition()
-        .delay(200)
+        .delay(170)
         .duration(3000)
       .attr("y", function(d) {
            return h - yScale(d.retweet_count) - 5;
@@ -163,14 +163,7 @@ barGraph(dataset)
 $(function() {
 
 
-$(".search-items").on('click', '.search-item', function(metrics){
-  console.log(this);
-  var index = $(this).index();
-  // updateTermInfo(metrics[index]);
-});
 
-
-  console.log($('.tooltip').position())
 })
 
 // end

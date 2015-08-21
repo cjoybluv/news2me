@@ -13,30 +13,53 @@
 
 
     <% var metrics = channelMetrics %>
+    <% var idx = 0 %>
 <script type="text/javascript">
-$(function() {
-    var metrics = <%- JSON.stringify(channelMetrics) %>;
-    updateTermInfo(metrics[0]);
+  $(function() {
+      var metrics = <%- JSON.stringify(channelMetrics) %>;
+      var idx = <%- JSON.stringify(idx) %>;
+      idx = parseInt(idx);
+      updateTermInfo(metrics[idx]);
 
-  })
+    $('.search-items').on('click', '.search-item', {metrics: metrics}, function(event) {
+      $('.before-tweet-list').html('')
+      metrics = event.data.metrics;
+      idx = $(this).index();
+      updateTermInfo(metrics[idx]);
+
+      $('#mostviral-term').html(metrics[idx].term);
+      $('#mostviral-image').attr("src", metrics[idx].image_url)
+      $('#tweetnum').html(metrics[idx].tweets.length);
+      $('#favtotal').html(metrics[idx].favorite_total);
+      $('#retweetnum').html(metrics[idx].retweet_total);
+      if (metrics[idx].sentiment_avg === 0) {
+          metrics[idx].sentiment_avg = "neutral";
+      }
+      $('#tweetsentiment').html(metrics[idx].sentiment_avg);
+
+    });
+
+
+    })
 
 </script>
 
 
-    <% var firstTerm = channelMetrics.shift() %>
+    <% var firstTerm = metrics[idx] %>
+
 <div class="trending-leaderboard">
   <div class="row leaderboard-header">
       <div class="col-md-12 col-lg-12">
       <h4 class="stats"><div class="col-md-2 col-lg-2 stats-title">Viral Tweet Stats:</div>
 
       <div class="col-md-2 col-lg-2">
-      tweets: <span class="trending-leader"><%= firstTerm.tweets.length %></span> </div>
-        <div class="col-md-2 col-lg-2">retweets:<span class="trending-leader"> <%= firstTerm.retweet_total %></span></div>
-        <div class="col-md-3 col-lg-3">favorites:<span class="trending-leader"> <%= firstTerm.favorite_total %></span></div>
+      tweets: <span class="trending-leader" id="tweetnum"><%= firstTerm.tweets.length %></span> </div>
+        <div class="col-md-2 col-lg-2">retweets: <span class="trending-leader" id="retweetnum"> <%= firstTerm.retweet_total %></span></div>
+        <div class="col-md-3 col-lg-3">favorites: <span class="trending-leader" id="favtotal"> <%= firstTerm.favorite_total %></span></div>
         <% if (firstTerm.sentiment_avg === 0) { %>
           <% firstTerm.sentiment_avg = "neutral"; %>
         <% } %>
-        <div class="col-md-3 col-lg-3">average sentiment:<span class="trending-leader sentiment"> <%= firstTerm.sentiment_avg %></span></div>
+        <div class="col-md-3 col-lg-3">average sentiment: <span class="trending-leader sentiment" id="tweetsentiment"> <%= firstTerm.sentiment_avg %></span></div>
         <span class="negKeyColor"></span><span class="negKey">negative tweet</span></br>
         <span class="neuKeyColor"></span><span class="neuKey">neutral tweet</span></br>
         <span class="posKeyColor"></span><span class="posKey">positive tweet</span></br>
@@ -44,7 +67,7 @@ $(function() {
         </h4>
     </div>
     <div class="col-md-12 col-lg-12">
-      <h3><span class="leaderImage termImage img-responsive"><img src="<%= firstTerm.image_url %>"></span>Most viral: <span class="trending-leader"><%= firstTerm.term %></span></h3>
+      <h3><span class="leaderImage termImage img-responsive"><img id="mostviral-image" src="<%= firstTerm.image_url %>"></span>Most viral: <span class="trending-leader" id="mostviral-term"><%= firstTerm.term %></span></h3>
     </div>
   </div>
   <div class="before-tweet-list">

@@ -1,8 +1,35 @@
-<script>
-$(function() {
-    var metrics = <%- JSON.stringify(channelMetrics) %>;
-    updateTermInfo(metrics[0]);
-  })
+    <% var metrics = channelMetrics %>
+    <% var idx = 0 %>
+
+<script type="text/javascript">
+  $(function() {
+      var metrics = <%- JSON.stringify(channelMetrics) %>;
+      var idx = <%- JSON.stringify(idx) %>;
+      idx = parseInt(idx);
+      updateTermInfo(metrics[idx]);
+
+    $('.search-items').on('click', '.search-item', {metrics: metrics}, function(event) {
+      $('.before-tweet-list').html('')
+      metrics = event.data.metrics;
+      idx = $(this).index();
+      updateTermInfo(metrics[idx]);
+
+      // var tweetsentiment = $('#tweetsentiment').html(metrics[idx].sentiment_avg)
+
+      $('#mostviral-term').html(metrics[idx].term);
+      $('#mostviral-image').attr("src", metrics[idx].image_url)
+      $('#tweetnum').html(metrics[idx].tweets.length);
+      $('#favtotal').html(metrics[idx].favorite_total);
+      $('#retweetnum').html(metrics[idx].retweet_total);
+      if (metrics[idx].sentiment_avg === 0) {
+          metrics[idx].sentiment_avg = "neutral";
+      }
+      $('#tweetsentiment').html(metrics[idx].sentiment_avg);
+
+    });
+
+
+    })
 
 </script>
 
