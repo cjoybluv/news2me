@@ -101,21 +101,29 @@ router.post('/:id/terms', function(req,res) {
       db.channel.findById(req.params.id).then(function(thisChannel){
 
       var term = req.body.term
+      if (term[0]==='@' || term[0] === '#') {
+         term = term.slice(1,term.length);
+      }
+
       client.get('search/tweets', {'q': term + ' since:2015-01-01', 'count': 30, 'result\_type':'popular'},
         function(error, tweets, response){
           //res.send(tweets)
 
             db.channel.findById(req.params.id).then(function(thisChannel){
-
+              // thisChannel.createSearchterm({
                 var image = 'https://pbs.twimg.com/profile_images/378800000700003994/53d967d27656bd5941e7e1fcddf47e0b_400x400.png';
-                if (false && req.body.image_url == '' && tweets.statuses.length > 0) {
                   if (tweets.statuses[0].entities.media && tweets.statuses[0].entities.media.length > 0){
                     image = tweets.statuses[0].entities.media[0].media_url_https + ':large'
                   }
-                }
-                if (req.body.image_url != ''){
+                // if (req.body.image_url !== ''){
+                //   if (tweets.statuses[0].entities.media && tweets.statuses[0].entities.media.length > 0){
+                //     image = tweets.statuses[0].entities.media[0].media_url_https + ':large'
+                //   }
+                // }
+                if (req.body.image_url !== ''){
                   image = req.body.image_url;
                 }
+
 
               db.searchterm.findOrCreate({
                 where:{
@@ -166,8 +174,7 @@ router.post('/:id/terms', function(req,res) {
                     callback();
                   }).catch(callback); // tweet.findOrCreate({
                 },function(error){
-                  // dh fri 1am   - no if
-                    res.redirect('/channels/'+thisChannel.id+'/terms/new');
+                  res.redirect('/channels/'+thisChannel.id+'/terms/new');
                   // if(error){
                   //   res.send(error);
                   // }else{

@@ -1,13 +1,21 @@
 var db = require('../models');
 
+
+var term = 'portland';
+if (term[0]==='@' || term[0] === '#') {
+  term = term.slice(1,term.length);
+}
+console.log(term);
+
+
 // hello
 
-db.channel.find({
-  where:{id:1},
-  include:[db.user]
-}).then(function(thisChannel){
-  console.log(thisChannel.getUser().id);
-});
+// db.channel.find({
+//   where:{id:1},
+//   include:[db.user]
+// }).then(function(thisChannel){
+//   console.log(thisChannel.getUser().id);
+// });
 
 // // create 1st search_term
 // db.channel.findById(1).then(function(channel){
