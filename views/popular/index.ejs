@@ -14,13 +14,15 @@
       idx = $(this).index();
       updateTermInfo(metrics[idx]);
 
+      // var tweetsentiment = $('#tweetsentiment').html(metrics[idx].sentiment_avg)
+
       $('#mostviral-term').html(metrics[idx].term);
       $('#mostviral-image').attr("src", metrics[idx].image_url)
       $('#tweetnum').html(metrics[idx].tweets.length);
       $('#favtotal').html(metrics[idx].favorite_total);
       $('#retweetnum').html(metrics[idx].retweet_total);
       if (metrics[idx].sentiment_avg === 0) {
-          $('#tweetsentiment').html(metrics[idx].sentiment_avg) = "neutral";
+          metrics[idx].sentiment_avg = "neutral";
       }
       $('#tweetsentiment').html(metrics[idx].sentiment_avg);
 

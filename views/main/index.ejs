@@ -20,7 +20,7 @@
       $('#favtotal').html(metrics[idx].favorite_total);
       $('#retweetnum').html(metrics[idx].retweet_total);
       if (metrics[idx].sentiment_avg === 0) {
-          $('#tweetsentiment').html(metrics[idx].sentiment_avg) = "neutral";
+          metrics[idx].sentiment_avg = "neutral";
       }
       $('#tweetsentiment').html(metrics[idx].sentiment_avg);
 
