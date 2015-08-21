@@ -18,6 +18,10 @@ twitter model:
 <div class="col-md-4"><span><label>Search Term</label><input type="text" class="form-control" placeholder="Search Term (word, @tag, #tag)" name="term"></span></div><div class="col-md-7"><span><label>Term's Image Url (optional)</label><input type="text" class="form-control" placeholder="Image URL for search Term" name="image_url"></span><a href="#" class="btn btn-default remove_field">-</a></div>
 
 
+    <!-- DH IS HERE - PULL TWEETS IF CURRENTCHANNEL.OWNER = CURRENTUSER -->
+    <% if(channel.userId===currentUser.id) { %>
+      <span class="button button-primary pull-right"><a href="/test" title="Pull Tweets">Pull Tweets</a></span>
+    <% } %>
 
 
 

@@ -31,8 +31,8 @@
         <tbody>
           <% thisChannel.searchterms.forEach(function(term) { %>
             <tr>
-              <td><%= term.term %></td>
-              <td><%= term.image_url %></td>
+              <td><h4><%= term.term %></h4></td>
+              <td><img src="<%= term.image_url %>" class="term-thumb"></td>
               <!-- DH 8/20 13:45 SETUP FOR DELETE ROUTE -->
               <td><a href="/channels/<%= thisChannel.id %>/terms/<%= term.id %>/delete" class="glyphicon glyphicon-trash" id="deleteTerm"></a></td>
             </tr>

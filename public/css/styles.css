@@ -288,3 +288,7 @@ div.tooltip i {
   color: #59adeb;
 }
 
+.term-thumb {
+  width: 75px;
+  height: 75px;
+}

@@ -2,6 +2,12 @@ var db = require('../models');
 
 // hello
 
+db.channel.find({
+  where:{id:1},
+  include:[db.user]
+}).then(function(thisChannel){
+  console.log(thisChannel.getUser().id);
+});
 
 // // create 1st search_term
 // db.channel.findById(1).then(function(channel){
@@ -20,12 +26,12 @@ var db = require('../models');
 //   })
 // });
 
-db.channel.findById(1).then(function(thisChannel){
-  // console.log(thisTerm.getTweets().length);
-  thisChannel.getSearchterms().then(function(searchTerms) {
-    console.log(searchTerms.length);
-  });
-});
+// db.channel.findById(1).then(function(thisChannel){
+//   // console.log(thisTerm.getTweets().length);
+//   thisChannel.getSearchterms().then(function(searchTerms) {
+//     console.log(searchTerms.length);
+//   });
+// });
 
 
 

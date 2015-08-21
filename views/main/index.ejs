@@ -1,4 +1,17 @@
-<h2>Current Channel: <%= channel.name %></h2>
+<h2>
+  Current Channel: <%= channel.name %>
+
+  <!-- DH IS HERE - PULL TWEETS IF CURRENTCHANNEL.OWNER = CURRENTUSER -->
+  <% if(channel.userId===currentUser.id) { %>
+    <span class="pull-right"><a href="/test" title="Pull Tweets"><small>Pull Tweets</small></a></span>
+  <% } %>
+</h2>
+
+
+
+
+
+
     <% var metrics = channelMetrics %>
 <script type="text/javascript">
 $(function() {
@@ -80,5 +93,4 @@ $(function() {
 <script type="text/javascript">
   var twitter_result = <%- JSON.stringify(firstTerm) %>;
 </script>
-
 
