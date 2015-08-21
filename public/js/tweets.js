@@ -50,7 +50,7 @@ function updateTermInfo(twitter_result){
 
   var xScale = d3.scale.ordinal()
           .domain(d3.range(0,dataset.length))
-          .rangeBands([0, w - 12])
+          .rangeBands([0, w - 15])
 
   var barGraph = function(dataset){
    svg.selectAll("rect")
