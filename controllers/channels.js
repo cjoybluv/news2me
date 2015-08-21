@@ -93,7 +93,7 @@ router.post('/:id/terms', function(req,res) {
             db.channel.findById(req.params.id).then(function(thisChannel){
               // thisChannel.createSearchterm({
                 var image = '';
-                if (tweets.statuses[0].entities.media.length > 0){
+                if (tweets.statuses[0].entities.media.media_url_https.length > 0){
                   image = tweets.statuses[0].entities.media[0].media_url_https + ':large'
                 }
               db.searchterm.findOrCreate({
@@ -103,7 +103,7 @@ router.post('/:id/terms', function(req,res) {
                 },
                 defaults:{
                   term: req.body.term,
-                  image_url: image,
+                  image_url: tweets.statuses[0].entities.media[0].media_url_https + ':large',
                   channelId: thisChannel.id
                 }
               }).spread(function(searchterm, created){
