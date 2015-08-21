@@ -18,26 +18,29 @@
           </div>
         </div>
   </form>
-
-  <table class="table table-hover display-table">
-    <thead>
-      <tr>
-        <th>Search Term</th>
-        <th>Term's Image Url</th>
-        <th>&nbsp;</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% thisChannel.searchterms.forEach(function(term) { %>
-        <tr>
-          <td><%= term.term %></td>
-          <td><%= term.image_url %></td>
-          <!-- DH 8/20 13:45 SETUP FOR DELETE ROUTE -->
-          <td><a href="/channels/<%= thisChannel.id %>/terms/<%= term.id %>/delete" class="glyphicon glyphicon-trash" id="deleteTerm"></a></td>
-        </tr>
-      <% }) %>
-      </tbody>
-  </table>
+  <div class="well">
+    <table class="table-responsive">
+      <table class="table table-hover display-table">
+        <thead>
+          <tr>
+            <th>Search Term</th>
+            <th>Term's Image Url</th>
+            <th><a href="/channels/<%= thisChannel.id%>" class="btn btn-primary btn-xs">Go</a></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% thisChannel.searchterms.forEach(function(term) { %>
+            <tr>
+              <td><%= term.term %></td>
+              <td><%= term.image_url %></td>
+              <!-- DH 8/20 13:45 SETUP FOR DELETE ROUTE -->
+              <td><a href="/channels/<%= thisChannel.id %>/terms/<%= term.id %>/delete" class="glyphicon glyphicon-trash" id="deleteTerm"></a></td>
+            </tr>
+          <% }) %>
+          </tbody>
+      </table>
+    </table>
+  </div>
 
 
 </div>

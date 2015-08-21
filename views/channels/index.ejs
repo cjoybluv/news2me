@@ -19,14 +19,13 @@
     <div class="well">
     <div class="row">
     <div class="col-md-2 col-lg-2">
-    <% if (channel.id == currentChannel) { %>
-      <h4><span class="label label-info">current</span></h4>
-    <% } else { %>
-      <a class="btn btn-success btn-md" href="/channels/<%= channel.id %>">Set</a>
-    <% } %>
+      <% if (channel.id == currentChannel) { %>
+        <h4><a href="/"><span class="btn btn-info btn-md">Current</span></a></h4>
+      <% } else { %>
+        <a class="btn btn-success btn-md" href="/channels/<%= channel.id %>">Set</a>
+      <% } %>
     </div>
     <div class="col-md-6 col-lg-6">
-
       <h4><%= channel.name %></h4>
     </div>
     <div class="col-md-4 col-lg-4">

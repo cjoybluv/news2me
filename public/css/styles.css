@@ -10,9 +10,11 @@ body {
  /*min-height: 80px;*/
  border: 1px solid transparent;
 }
+
 .navbar-default .navbar-text {
   color: #cecece;
 }
+
 .container {
   /*background-color: #fff;*/
   border-radius: 6px;
@@ -64,9 +66,12 @@ form .btn-primary.add-term {
   color: #00473C;
 }
 
+.alert {
+  opacity: .8;
+}
+
 .display-table {
   margin-left: .5em;
-  max-width: 80%;
 }
 
 .input-group-addon {
@@ -125,14 +130,10 @@ form .btn-primary:hover {
   background-color: #00A388;
 }
 
-
-
 h1, h2, h3 {
- /*color: #e6e6e6 ;*/
  font-weight: normal;
  text-align: center;
  margin-bottom: 1em;
-/*font-family: 'Merriweather', serif;*/
 }
 
 h3 {
@@ -227,7 +228,7 @@ h4 {
 }
 
 .trending-leaderboard .termImage img {
-  margin-top: -3.5em;
+  margin-top: -3em;
 }
 
 .stats {
