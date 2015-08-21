@@ -59,8 +59,9 @@ $(function() {
               <tr>
                 <td><%= term.retweet_total %></td>
                 <td><%= term.favorite_total %></td>
-
-
+                  <% if (term.sentiment_avg === 0) { %>
+                    <% term.sentiment_avg = "neutral"; %>
+                  <% } %>
                 <td><%= term.sentiment_avg %></td>
                 <td><%= term.tweets.length %></td>
               </tr>

@@ -71,8 +71,9 @@ function updateTermInfo(twitter_result){
         div.transition()
             .duration(200)
             .style("opacity", .8);
+        var tooltipX = d3.event.pageX + 400 > $('body').width() ? d3.event.pageX - 350 : d3.event.pageX;
         div.html('<i class="fa fa-twitter"></i> ' + d.text + "</br><em>Sentiment score: " + d.sentiment_score + "</em>")
-            .style("left", (d3.event.pageX) + "px")
+            .style("left", tooltipX + "px")
             .style("top", (d3.event.pageY - 80) + "px");
         }).on("mouseout", function(d) {
           d3.select(this)
@@ -111,7 +112,6 @@ function updateTermInfo(twitter_result){
      .attr("height", function(d,i){
        return yScale(d.retweet_count);})
      .attr("y", function(d,i){
-       console.log("retweet count",d.retweet_count)
        return h - yScale(d.retweet_count);})
      .attr("stroke","#333");
 
@@ -161,11 +161,16 @@ barGraph(dataset)
 
 }
 $(function() {
+
+
 $(".search-items").on('click', '.search-item', function(metrics){
   console.log(this);
   var index = $(this).index();
   // updateTermInfo(metrics[index]);
 });
+
+
+  console.log($('.tooltip').position())
 })
 
 // end
