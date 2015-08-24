@@ -1,3 +1,58 @@
+FINAL CHECKLIST FOR PORTFOLIO:
+==================================
+1) FIX SEARCH TERM CREATE BUG:  may be "multi word" causes crash?
+
+
+
+
+
+
+
+
+TEAM RETROSPECTIVE:
+1) working in a team is challenging & rewarding.
+    a) challenging: blending ideas, code, comm. style, vision
+    b)  rewarding:    same ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2)
+
+
+
+What I did well:
+1)  resolve technical issues,
+2)
+
+     Fairly well
+1)  git issues,
+2)  flexible on design vision,
+
+    need improvement,
+1)   patience for team consensus building
+2)   cognizant of sensitivities
+
+What did I learn:
+1)  time spent building team consensus may be messy, but produces rewards.
+
+what would I do differently:
+1)   spend some time in group-huddle coding.
+2)   spend more time as team talking thru idea-issues.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 consumer_key is: <%= consumer_key %> !!!
 
 twitter model:
