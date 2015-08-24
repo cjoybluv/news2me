@@ -1,10 +1,12 @@
 FINAL CHECKLIST FOR PORTFOLIO:
 ==================================
 1) FIX SEARCH TERM CREATE BUG:  may be "multi word" causes crash?
+     >> fixed: 8/24
+2) had User create Obscene channel: hasBeenDeleted!!  what to do about issue???
+    ??  API to filter obscene terms?
 
-
-
-
+3)  channel list has no order:
+    >> sort by channel.name,
 
 
 

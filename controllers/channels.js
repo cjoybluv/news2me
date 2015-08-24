@@ -12,7 +12,9 @@ router.get('/', function(req,res){
   //   });
 
   // });
-  db.channel.findAll().then(function(channels){
+  db.channel.findAll({
+    order:[[db.channel.sequelize.fn('upper',db.channel.sequelize.col('name')), 'ASC']]
+  }).then(function(channels){
       // res.send(channels)
       var array = [];
       var newArray = [];
