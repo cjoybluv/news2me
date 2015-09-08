@@ -12,10 +12,12 @@ router.get('/', function(req,res){
   //   });
 
   // });
-  db.channel.findAll().then(function(channels){
+  db.channel.findAll({
+    order:[[db.channel.sequelize.fn('upper',db.channel.sequelize.col('name')), 'ASC']]
+  }).then(function(channels){
       // res.send(channels)
       var array = [];
-      var newArray = []
+      var newArray = [];
       channels.forEach(function(data){
         // dh push full channel rec so se have id
         array.push(data);
@@ -112,9 +114,16 @@ router.post('/:id/terms', function(req,res) {
             db.channel.findById(req.params.id).then(function(thisChannel){
               // thisChannel.createSearchterm({
                 var image = 'https://pbs.twimg.com/profile_images/378800000700003994/53d967d27656bd5941e7e1fcddf47e0b_400x400.png';
-                  if (tweets.statuses[0].entities.media && tweets.statuses[0].entities.media.length > 0){
+                  // if (tweets.statuses[0].entities.media && tweets.statuses[0].entities.media.length > 0){
+                  if (typeof tweets.statuses[0] != 'undefined' && tweets.statuses[0].entities.media && tweets.statuses[0].entities.media.length > 0){
                     image = tweets.statuses[0].entities.media[0].media_url_https + ':large'
                   }
+
+//  DH:  8/24/2015 16:20, fix to ln 115, now handles "multi word" terms.
+// Unhandled rejection TypeError: Cannot read property 'entities' of undefined
+// 2015-08-24T23:07:37.416920+00:00 app[web.1]:     at null.<anonymous> (/app/controllers/channels.js:115:41)
+
+
                 // if (req.body.image_url !== ''){
                 //   if (tweets.statuses[0].entities.media && tweets.statuses[0].entities.media.length > 0){
                 //     image = tweets.statuses[0].entities.media[0].media_url_https + ':large'
