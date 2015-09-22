@@ -1,5 +1,11 @@
 <h1>Channels</h1>
 
+<div class="col-md-4">
+  <% if (!currentUser) { %>
+    <h3>Welcome to<br/> the Channel Index</h3>
+    <h4>Please, signup or login if you would like to create your own channels.</h4>
+  <% } %>
+</div>
 <div class="col-md-offset-4 col-sm-7 col-md-7 col-lg-7">
 
   <% channels.forEach(function(channel) { %>
