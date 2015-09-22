@@ -8,8 +8,10 @@ var sentiment = require('sentiment');
 
 // CHANNEL LIST
 router.get('/', function(req,res){
+  var userId = req.session.user || 0;
+
   db.channel.findAll({
-    where: db.channel.sequelize.or({userId:req.session.user},{userId:0}),
+    where: db.channel.sequelize.or({userId:userId},{userId:0}),
     order:[
       ['userId'],
       [db.channel.sequelize.fn('upper',db.channel.sequelize.col('name')), 'ASC']]
