@@ -30,7 +30,8 @@
     </div>
     <div class="col-md-4 col-lg-4">
       <% if (channel.userId === currentUser.id) { %>
-      <a href="channels/<%= channel.id %>/edit"><span class="btn btn-sm btn-primary glyphicon glyphicon-pencil"></span></a>
+        <a href="channels/<%= channel.id %>/delete"><span class="btn btn-sm btn-primary glyphicon glyphicon-trash"></span></a>
+        <a href="channels/<%= channel.id %>/edit"><span class="btn btn-sm btn-primary glyphicon glyphicon-pencil"></span></a>
       <% } %>
     </div>
     </div>

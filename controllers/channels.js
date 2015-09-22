@@ -225,6 +225,14 @@ router.post('/:id/edit', function(req,res) {
   });
 });
 
+// DELETE CHANNEL with Cascade > SearchTerms & Tweets
+router.get('/:id/delete', function(req,res) {
+  db.channel.destroy({
+    where:{id:req.params.id}
+  }).then(function(result){
+    res.redirect('/channels');
+  });
+});
 
 // DELETE SEARCHTERM
 router.get('/:id/terms/:termId/delete', function(req,res) {
@@ -234,7 +242,7 @@ router.get('/:id/terms/:termId/delete', function(req,res) {
     // search term detroyed
     res.redirect('/channels/'+req.params.id+'/terms/new');
   });
-})
+});
 
 
 // channel show

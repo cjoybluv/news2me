@@ -6,10 +6,28 @@ FINAL CHECKLIST FOR PORTFOLIO:
     ??  API to filter obscene terms?
 
 3)  channel list has no order:
-    >> sort by channel.name,
+    >> sort by channel.name, Aa-Zz;  DONE DH 8/24; PUSHED
+
+4)  EXPLAIN PLEASE, selection & sort criteria for "Most Popular" block on channels list
+
+add category to channels, & destroy  >> DH
+
+public/sample channels:
+1 presidentElect, 3 earthChanges, 4 @presidentElect, 3012 Cascadia (lenny), 30 Sci-Fi, 3000 GA (brian)
+need good Seattle Sports channel >> MS.
 
 
+CASCASE DESTROY:=====================
+ALTER TABLE "searchterms"
+ADD CONSTRAINT "searchterms_channelId_fkey" FOREIGN KEY ("channelId")
+REFERENCES "channels" (id) MATCH SIMPLE
+ON DELETE CASCADE;
 
+ALTER TABLE "tweets"
+ADD CONSTRAINT "tweets_channelId_fkey" FOREIGN KEY ("channelId")
+REFERENCES "channels" (id) MATCH SIMPLE
+ON DELETE CASCADE;
+===========================================
 
 TEAM RETROSPECTIVE:
 1) working in a team is challenging & rewarding.
@@ -42,15 +60,58 @@ what would I do differently:
 
 
 
+/////////////////////////////////
+
+
+WDI Group Project Retrospective
+
+CONNECTION TO MID & LONG TERM GOALS
+Part of being an effective web developer is being able to communicate the work you have done and provide the rationale behind decisions that you have made. This retrospective will give you the opportunity to summarize and synthesize your projects so you can display them in your portfolio as compelling examples of your work!
+
+RULE FOR RETROSPECTIVE
+You must be objective and specific in your assessment of what happened.
+Take 15 minutes to think about and write down your individual responses.
+Take 30 minutes to discuss as a group, your team’s PM should facilitate the discussion.
+Take 10 minutes to write down your team’s biggest takeaways, and email to your Outcomes Producer (casey@ga.co).
+<<<<<<
+BIGGEST TAKEAWAYS
+
+
+>>>>>>
+Take 5 minutes to hug it out.
+
+LET’S GET STARTED
+Think back over your process during the project and answer the following questions from, Project Retrospectives: A Handbook for Team Reviews:
+
+-What did I do well that if I don’t record I might forget? Be specific!
+-What did I learn?
+-What should I do differently next time?
+-What still puzzles us?
+
+The idea is to optimize the process and team communication for your next sprint!
+More retrospective questions available here.
+
+***Rooms available: Heywanna in classroom, news2me2 in office 124, bloxscore in 1D, mesa in 1C, instigatr in 1B, prepper prepper in 1A
+
+--------------------------------------------------------------------------------------------------
+WEEKEND RETROSPECTIVE ASSIGNMENT
+Prepare the following answers for your project in preparation for the Meet & Greet. Explain your answers to a technical and non-technical friend!
+
+-State the project title and problem you wanted to solve / opportunity you wanted to explore / goal you wanted to achieve.
+-Explain why the project was of interest / important to you.
+-Describe your role.
+-Explain the steps and activities you performed from the beginning to the end.
+-Explain your results.
+-Describe what you found most surprising.
+-What were the most important things (list at least 3), you learned from doing this project?
+-What are the next steps that you would take / recommend that others take if this project continues?
 
 
 
 
 
 
-
-
-
+///////////////////////////////////
 
 
 
