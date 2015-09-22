@@ -14,11 +14,9 @@ router.get('/', function(req,res){
       ['userId'],
       [db.channel.sequelize.fn('upper',db.channel.sequelize.col('name')), 'ASC']]
   }).then(function(channels){
-      // res.send(channels)
       var array = [];
       var newArray = [];
       channels.forEach(function(data){
-        // dh push full channel rec so se have id
         array.push(data);
       })
 
@@ -46,7 +44,6 @@ router.get('/', function(req,res){
         return b.count - a.count
       });
       newArray = newArray.slice(0,5)
-        // res.send(newArray)
          res.render('channels/index', {newArray: newArray,
          channels: channels,
          currentUser: req.currentUser,
