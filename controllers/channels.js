@@ -5,15 +5,14 @@ var Twitter = require('twitter');
 var async = require('async');
 var sentiment = require('sentiment');
 
-router.get('/', function(req,res){
-  // db.channel.findAll().then(function(channels){
-  //   res.render('channels/index',{
-  //     channels: channels
-  //   });
 
-  // });
+// CHANNEL LIST
+router.get('/', function(req,res){
   db.channel.findAll({
-    order:[[db.channel.sequelize.fn('upper',db.channel.sequelize.col('name')), 'ASC']]
+    where: db.channel.sequelize.or({userId:req.session.user},{userId:0}),
+    order:[
+      ['userId'],
+      [db.channel.sequelize.fn('upper',db.channel.sequelize.col('name')), 'ASC']]
   }).then(function(channels){
       // res.send(channels)
       var array = [];
@@ -43,9 +42,9 @@ router.get('/', function(req,res){
         });
       }
 
-      newArray.sort(function(a,b){
+      newArray = newArray.sort(function(a,b){
         return b.count - a.count
-      })
+      });
       newArray = newArray.slice(0,5)
         // res.send(newArray)
          res.render('channels/index', {newArray: newArray,
