@@ -1,12 +1,37 @@
 <h1>Channels</h1>
 
 <div class="col-md-4">
-  <% if (!currentUser) { %>
-    <h3>Welcome to<br/> the Channel Index</h3>
-    <h4>Please, signup or login if you would like to create your own channels.</h4>
-  <% } %>
+  <div class="row">
+    <% if (!currentUser) { %>
+      <h3>Welcome to<br/> the Channel Index</h3>
+      <h4>Please, signup or login if you would like to create your own channels.</h4>
+    <% } %>
+  </div>
+
+  <div class="row">
+    <h3>Most Viral Channels</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Channel</th>
+          <th>reTweet Total*</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% viralChannels.forEach(function(channel) { %>
+          <tr>
+            <td><%= channel.channel %></td>
+            <td><%= channel.retweetTotal %></td>
+          </tr>
+        <% }) %>
+
+      </tbody>
+    </table>
+    <p>* reTweet Total based on 50 most recent popular tweets per channel.</p>
+  </div>
+
 </div>
-<div class="col-md-offset-4 col-sm-7 col-md-7 col-lg-7">
+<div class="col-sm-7 col-md-7 col-lg-7">
 
   <% channels.forEach(function(channel) { %>
     <div class="well">

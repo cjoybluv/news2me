@@ -16,41 +16,31 @@ router.get('/', function(req,res){
       ['userId'],
       [db.channel.sequelize.fn('upper',db.channel.sequelize.col('name')), 'ASC']]
   }).then(function(channels){
-      var array = [];
-      var newArray = [];
-      channels.forEach(function(data){
-        array.push(data);
-      })
 
-      var counts = {}, ids = {};
-      array.forEach(function(item) {
-        if (counts[item]) {
-          counts[item.name] += 1;
-        } else {
-          counts[item.name] = 1;
-          // build parallel object to counts to hold 1st Id of each unique channel.name
-          ids[item.name] = item.id;
-        }
+    db.channel.findAll({
+      include:[db.tweet]
+    }).then(function(allChannels){
+      var viralChannels = allChannels.map(function(channel){
+        var retweetTotal = channel.tweets.sort(date_desc).splice(0,50).reduce(function(a,b){
+          return a + b.retweet_count;
+        },0);
+        return {channel:channel.name,retweetTotal:retweetTotal};
       });
 
-      // DH 8/20 1:24P pass channel.id for deleteBtn
-      for (var key in counts){
-        newArray.push({
-          name: key,
-          id: ids[key],
-          count: counts[key]
-        });
-      }
+      console.log('viralChannels BEFORE',viralChannels);
 
-      newArray = newArray.sort(function(a,b){
-        return b.count - a.count
+      var viralChannels = viralChannels.sort(retweet_sort).splice(0,5);
+
+      console.log('viralChannels AFTER',viralChannels);
+      res.render('channels/index', {
+        viralChannels: viralChannels,
+        channels: channels,
+        currentUser: req.currentUser,
+        currentChannel: req.session.currentChannel
       });
-      newArray = newArray.slice(0,5)
-         res.render('channels/index', {newArray: newArray,
-         channels: channels,
-         currentUser: req.currentUser,
-         currentChannel: req.session.currentChannel});
+
     });
+  });
 });
 
 // ENTER NEW CHANNEL
@@ -116,17 +106,6 @@ router.post('/:id/terms', function(req,res) {
                   if (typeof tweets.statuses[0] != 'undefined' && tweets.statuses[0].entities.media && tweets.statuses[0].entities.media.length > 0){
                     image = tweets.statuses[0].entities.media[0].media_url_https + ':large'
                   }
-
-//  DH:  8/24/2015 16:20, fix to ln 115, now handles "multi word" terms.
-// Unhandled rejection TypeError: Cannot read property 'entities' of undefined
-// 2015-08-24T23:07:37.416920+00:00 app[web.1]:     at null.<anonymous> (/app/controllers/channels.js:115:41)
-
-
-                // if (req.body.image_url !== ''){
-                //   if (tweets.statuses[0].entities.media && tweets.statuses[0].entities.media.length > 0){
-                //     image = tweets.statuses[0].entities.media[0].media_url_https + ':large'
-                //   }
-                // }
                 if (req.body.image_url !== ''){
                   image = req.body.image_url;
                 }
@@ -254,100 +233,98 @@ router.get('/:id', function(req, res){
     req.session.currentChannel = req.params.id;
     res.redirect('/');
   } else {
-  var nameArray = [];
-  for (var key in req.params){
-    nameArray.push({
-          table: key,
-          name: req.params[key]
-        });
-  }
-
-  db.channel.find({
-    where:{
-      name: nameArray[0].name
-    },
-    include:[db.searchterm]
-  }).then(function(thisChannel){
-      var channelMetrics = [];
-      var topTweets = [];
-
-      thisChannel.getSearchterms().then(function(searchTerms) {
-
-      // console.log('pre async',searchTerms.length);
-
-      async.map(searchTerms,function(term,callback1){
-        // do something asynchronous here
-        var termMetric = {};
-        termMetric.term = term.term;
-        termMetric.image_url = term.image_url;
-
-        db.tweet.findAll({
-          where:{search_term: term.term},
-          order:[['tweet_created_at','DESC']],
-          limit: 15
-        }).then(function(tweets){
-
-            // res.send(tweets)
-          termMetric.retweet_total = tweets.reduce(function(a,b){
-            return a + b.retweet_count;
-          },0);
-          termMetric.favorite_total = tweets.reduce(function(a,b){
-            return a + b.favorite_count;
-          },0);
-          var sentiment_avg = tweets.reduce(function(a,b){
-               return a + b.sentiment_score;
-          },0);
-          if(tweets.length) {
-            sentiment_avg = parseInt(sentiment_avg/tweets.length);
-          }else{
-            sentiment_avg = 0;
-          }
-          termMetric.sentiment_avg = sentiment_avg;
-          termMetric.tweets = tweets.sort(date_asc);
-          var total = channelMetrics.push(termMetric);
-
-          // var tweetTotal = topTweets.push(tweets);
-          callback1(null,{
-            channelMetrics: channelMetrics
-            // topTweets: topTweets
+    var nameArray = [];
+    for (var key in req.params){
+      nameArray.push({
+            table: key,
+            name: req.params[key]
           });
+    }
+
+    db.channel.find({
+      where:{
+        name: nameArray[0].name
+      },
+      include:[db.searchterm]
+    }).then(function(thisChannel){
+        var channelMetrics = [];
+        var topTweets = [];
+
+        thisChannel.getSearchterms().then(function(searchTerms) {
+          async.map(searchTerms,function(term,callback1){
+            var termMetric = {};
+            termMetric.term = term.term;
+            termMetric.image_url = term.image_url;
+
+            db.tweet.findAll({
+              where:{search_term: term.term},
+              order:[['tweet_created_at','DESC']],
+              limit: 15
+            }).then(function(tweets){
+
+                // res.send(tweets)
+              termMetric.retweet_total = tweets.reduce(function(a,b){
+                return a + b.retweet_count;
+              },0);
+              termMetric.favorite_total = tweets.reduce(function(a,b){
+                return a + b.favorite_count;
+              },0);
+              var sentiment_avg = tweets.reduce(function(a,b){
+                   return a + b.sentiment_score;
+              },0);
+              if(tweets.length) {
+                sentiment_avg = parseInt(sentiment_avg/tweets.length);
+              }else{
+                sentiment_avg = 0;
+              }
+              termMetric.sentiment_avg = sentiment_avg;
+              termMetric.tweets = tweets.sort(date_asc);
+              var total = channelMetrics.push(termMetric);
+
+              callback1(null,{
+                channelMetrics: channelMetrics
+              });
+            });
+          }, function(err,results) {
+            var channelMetrics = results[0].channelMetrics;
+            var metrics = channelMetrics.sort(retweet_sort);
+
+            res.render('popular/index', {
+              channel: thisChannel,
+              search_terms: searchTerms,
+              channelMetrics: metrics
+              // topTweets: topTweets
+            });
+          });
+
         });
-      }, function(err,results) {
-        var channelMetrics = results[0].channelMetrics;
-        var metrics = channelMetrics.sort(retweet_sort);
-        // var topTweets = results[0].topTweets;
-
-        // console.log('done with everything',channelMetrics);
-        // res.send(topTweets);
-
-        res.render('popular/index', {
-          channel: thisChannel,
-          search_terms: searchTerms,
-          channelMetrics: metrics
-          // topTweets: topTweets
-        });
-      });
-
     });
-  });
-}
+  }
 });
 
-  //    MSHARIF34   GET IMAGE FROM TWITTER FOR DEFAULT IMAGE_URL >> NEEDS IMPLEMENTING
-  //
-  // // get default term imageUrl from twitter
-  // var client = new Twitter({
-  //   consumer_key: process.env.TWITTR_CONSUMER_KEY,
-  //   consumer_secret: process.env.TWITTR_CONSUMER_SECRET,
-  //   access_token_key: process.env.TWITTR_ACCESS_TOKEN_KEY,
-  //   access_token_secret: process.env.TWITTR_ACCESS_TOKEN_SECRET
-  // });
-  // client.get('search/tweets', {'q': term + ' since:2015-08-01', 'count': 15, 'result\_type': 'popular'},
-  //   function(error, tweets, response) {
-  //     if (error) throw error;
-  //     var url = tweets.statuses[0].user.profile_image_url
-  // });
+function date_desc(a,b) {
+  if (a.tweet_created_at > b.tweet_created_at) {
+    return -1;
+  }
+  else if(a.tweet_created_at < b.tweet_created_at) {
+    return 1;
+  }
+  else {
+    return 0;
+  }
+}
 
+function retweet_sort(a,b) {
+  if (a.retweetTotal < b.retweetTotal) {
+    return 1;
+  }
+  else if (a.retweetTotal > b.retweetTotal) {
+    return -1;
+  }
+  else {
+    return 0;
+  }
+}
 
 
 module.exports = router;

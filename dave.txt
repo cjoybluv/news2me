@@ -16,6 +16,9 @@ public/sample channels:
 1 presidentElect, 3 earthChanges, 4 @presidentElect, 3012 Cascadia (lenny), 30 Sci-Fi, 3000 GA (brian)
 need good Seattle Sports channel >> MS.
 
+TOP 5 VIRAL CHANNELS==================
+select c.name,sum(t.retweet_count) as viral_count from channels as c join tweets as t on c.id = t."channelId"
+group by c.name order by viral_count desc;
 
 CASCASE DESTROY:=====================
 ALTER TABLE "searchterms"
