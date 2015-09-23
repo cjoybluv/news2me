@@ -20,7 +20,7 @@
       <tbody>
         <% viralChannels.forEach(function(channel) { %>
           <tr>
-            <td><%= channel.channel %></td>
+            <td><a href="/channels/<%= channel.channel.id %>"><%= channel.channel.name %></a></td>
             <td><%= channel.retweetTotal %></td>
           </tr>
         <% }) %>

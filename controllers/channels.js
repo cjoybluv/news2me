@@ -24,7 +24,7 @@ router.get('/', function(req,res){
         var retweetTotal = channel.tweets.sort(date_desc).splice(0,50).reduce(function(a,b){
           return a + b.retweet_count;
         },0);
-        return {channel:channel.name,retweetTotal:retweetTotal};
+        return {channel:channel,retweetTotal:retweetTotal};
       });
 
       console.log('viralChannels BEFORE',viralChannels);
