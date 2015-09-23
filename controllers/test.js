@@ -32,7 +32,7 @@ router.get('/', function(req,res){
         // res.send(searchTerms);
 
         async.map(searchTerms, function(searchTerm, callback1) {
-          console.log("Searching for tweets on  : " + searchTerm.term);
+          // console.log("Searching for tweets on  : " + searchTerm.term);
           client.get('search/tweets', {'q': searchTerm.term + ' since:2015-01-01', 'count': 30, 'result\_type':'popular'},
              function(error, tweets, response){
                // if(error) throw error;
@@ -57,7 +57,11 @@ router.get('/', function(req,res){
 
                   var words = {'word':0};
                   var tweetSentiment = sentiment(thisTweet.text,words);
-
+                    // console.log('>>>>>> test : thisTweet <<<<<<<<< ',thisTweet.entities.urls[0].url);
+                    var url = thisTweet.user.url;
+                    if (typeof thisTweet.entities.urls[0] != 'undefined') {
+                      url = thisTweet.entities.urls[0].url;
+                    }
                     db.tweet.findOrCreate({
                       where:{tweet_id:thisTweet.id.toString(),channelId:channel.id},
                       defaults:{
@@ -66,7 +70,8 @@ router.get('/', function(req,res){
                         tweet_text: thisTweet.text,
                         tweet_source: thisTweet.source,
                         user_name: thisTweet.user.name,
-                        user_url: thisTweet.user.url,
+                        // user_url: thisTweet.user.url,
+                        user_url: url,
                         retweet_count: thisTweet.retweet_count,
                         favorite_count: thisTweet.favorite_count,
                         search_term: search_term.term,
@@ -79,13 +84,14 @@ router.get('/', function(req,res){
                         searchtermId: search_term.termId
                       }
                     }).spread(function(tweet, created) {
-                      console.log('tweet created',tweet);
+                      // console.log('tweet created',tweet);
                       if (!created) {
-                        console.log('>>>> FOUND <<<<<<< DO UPDATE',tweet);
+                        // console.log('>>>> FOUND <<<<<<< DO UPDATE',tweet);
                         tweet.retweet_count = thisTweet.retweet_count;
                         tweet.favorite_count = thisTweet.favorite_count;
                         tweet.follower_count = thisTweet.user.followers_count;
-                        tweet.searchtermId = search_term.termId
+                        tweet.user_url = thisTweet.entities.urls[0].url;
+                        tweet.searchtermId = search_term.termId;
                         tweet.save();
                       }
                       callback3(null,tweet);
@@ -99,13 +105,13 @@ router.get('/', function(req,res){
                  callback2(null,search_term.term);
 
                 });
-                console.log('after loop');
+                // console.log('after loop');
 
               });
              // res.send(result);
              res.redirect('/');
              });
-            console.log("DONE WITH EVERYTHING");
+            // console.log("DONE WITH EVERYTHING");
          });
 
       });

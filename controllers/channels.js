@@ -148,7 +148,10 @@ router.post('/:id/terms', function(req,res) {
 
                   var words = {'word':0};
                   var tweetSentiment = sentiment(tweet.text,words);
-
+                  var url = tweet.user.url;
+                    if (typeof tweet.entities.urls[0] != 'undefined') {
+                      url = tweet.entities.urls[0].url;
+                  }
                   db.tweet.findOrCreate({
                     where:{tweet_id:tweet.id.toString(),channelId:req.params.id},
                     defaults:{
@@ -157,7 +160,8 @@ router.post('/:id/terms', function(req,res) {
                       tweet_text: tweet.text,
                       tweet_source: tweet.source,
                       user_name: tweet.user.name,
-                      user_url: tweet.user.url,
+                      // user_url: tweet.user.url,
+                      user_url: url,
                       retweet_count: tweet.retweet_count,
                       favorite_count: tweet.favorite_count,
                       search_term: term,
@@ -175,7 +179,8 @@ router.post('/:id/terms', function(req,res) {
                       tweet.retweet_count = tweet.retweet_count;
                       tweet.favorite_count = tweet.favorite_count;
                       tweet.follower_count = tweet.user.followers_count;
-                      tweet.searchtermId = termId
+                      tweet.user_url = tweet.entities.urls[0].url;
+                      tweet.searchtermId = termId;
                       tweet.save();
                     }
                     callback();
