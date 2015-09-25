@@ -1,36 +1,18 @@
 <h1>Channels</h1>
-
-<div class="col-md-4">
-  <div class="row">
-    <% if (!currentUser) { %>
-      <h3>Welcome to<br/> the Channel Index</h3>
-      <h4>Please, signup or login if you would like to create your own channels.</h4>
-    <% } %>
+<hr>
+<div class="col-sm-3 col-md-3 col-lg-3 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+  <div class="well favs">
+    <h4>Most Popular</h4>
+    <% newArray.forEach(function(result, index){ %>
+      <div class="row">
+        <div class="pop-channel col-md-12 col-lg-12">
+          <a href="/popular/<%= result.name %>">  <%= index + 1 %>.  <%= result.name %></a>
+        </div>
+      </div>
+    <% }) %>
   </div>
-
-  <div class="row">
-    <h3>Most Viral Channels</h3>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Channel</th>
-          <th>reTweet Total*</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% viralChannels.forEach(function(channel) { %>
-          <tr>
-            <td><a href="/channels/<%= channel.channel.id %>"><%= channel.channel.name %></a></td>
-            <td><%= channel.retweetTotal %></td>
-          </tr>
-        <% }) %>
-
-      </tbody>
-    </table>
-    <p>* reTweet Total based on 50 most recent popular tweets per channel.</p>
-  </div>
-
 </div>
+
 <div class="col-sm-7 col-md-7 col-lg-7">
 
   <% channels.forEach(function(channel) { %>

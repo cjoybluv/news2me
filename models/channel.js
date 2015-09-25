@@ -7,8 +7,8 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         models.channel.belongsTo(models.user),
-        models.channel.hasMany(models.tweet),
-        models.channel.hasMany(models.searchterm)
+        models.channel.hasMany(models.tweet,{onDelete: 'cascade', hooks:true}),
+        models.channel.hasMany(models.searchterm,{onDelete: 'cascade', hooks:true})
      }
     }
   });
