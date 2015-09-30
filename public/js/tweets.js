@@ -2,8 +2,6 @@
 
 function updateTermInfo(twitter_result){
 
-  //TODO: clear old graph
-
   console.log(twitter_result);
 
   //... code from existing tweets.js
@@ -16,7 +14,7 @@ function updateTermInfo(twitter_result){
 
   var colors = d3.scale.linear()
     .domain([0,468])
-    .range(['#FF6138','#00A388']);
+    // .range(['#FF6138','#00A388']);
   var tempOpacity = 0;
 
   var terms_searched = {}
@@ -135,27 +133,6 @@ function updateTermInfo(twitter_result){
       }).attr("fill", "#333")
       .attr("text-anchor", "middle");
   }
-
-// to be used for animating counts on leaderboard
-
-  function animateValue(id, start, end, duration) {
-      var range = end - start;
-      var current = start;
-      var increment = end > start? 1 : -1;
-      var stepTime = Math.abs(Math.floor(duration / range));
-      var obj = document.getElementById(id);
-      var timer = setInterval(function() {
-          current += increment;
-          obj.innerHTML = current;
-          if (current == end) {
-              clearInterval(timer);
-          }
-      }, stepTime);
-  }
-
-// var getNumber = function()
-
-// animateValue("number", 0, 25, 2000);
 
 barGraph(dataset)
 
