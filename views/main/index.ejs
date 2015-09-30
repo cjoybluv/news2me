@@ -7,14 +7,10 @@
   <% } %>
 </h2>
 
-
-
-
-
-
     <% var metrics = channelMetrics %>
     <% var idx = 0 %>
 <script type="text/javascript">
+  // updates graph at top
   $(function() {
       var metrics = <%- JSON.stringify(channelMetrics) %>;
       var idx = <%- JSON.stringify(idx) %>;
@@ -36,14 +32,9 @@
           metrics[idx].sentiment_avg = "neutral";
       }
       $('#tweetsentiment').html(metrics[idx].sentiment_avg);
-
     });
-
-
-    })
-
+  })
 </script>
-
 
     <% var firstTerm = metrics[idx] %>
 

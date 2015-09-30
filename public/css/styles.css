@@ -1,13 +1,10 @@
 body {
-  font-family: 'Arimo', sans-serif;
-  font-family: 'Oxygen', sans-serif;
- /*background-color: #444;*/
+ font-family: 'Oxygen', sans-serif;
  background-image: url('../images/congruent_pentagon_faded.png');
 }
 
 .mynav {
  background-color: #444;
- /*min-height: 80px;*/
  border: 1px solid transparent;
 }
 
@@ -16,14 +13,12 @@ body {
 }
 
 .container {
-  /*background-color: #fff;*/
   border-radius: 6px;
 }
 
 .mynav .navbar-brand {
  font-size: 2em;
  padding: .5em;
- /*font-family: 'Merriweather', serif;*/
 }
 .mynav.navbar-default .navbar-brand {
  color: #79BD8F ;
@@ -69,13 +64,15 @@ form .btn-primary.add-term {
 .alert {
   opacity: .8;
 }
+.user-message {
+  margin-bottom: 2em;
+}
 
 .display-table {
   margin-left: .5em;
 }
 
 .input-group-addon {
-  /*background-color: rgba(0,125,104,.2);*/
   background-color: rgba(255,79,56,.2);
 }
 input[type="text"],
@@ -151,7 +148,6 @@ ul.search-items {
 
 .well {
  opacity: .7;
- /*border: 1px solid rgba(255,97,56,.5);*/
  border: 1px solid #79BD8F;
 }
 
@@ -161,8 +157,6 @@ ul.search-items {
  margin: .5em 0;
  background-color: rgba(0,0,0,.6) ;
  border: 1px solid #79BD8F ;
- /*border-right: 5px solid #79BD8F;*/
- /*border-left: 5px solid #79BD8F;*/
  position: relative;
  border-radius: 5px;
  color: #fff;
@@ -188,13 +182,7 @@ form {
  margin: 1em 1em 0 0;
 }
 
-h4 {
- /*padding-left: 1em;*/
- /*float: right;*/
-}
-
 .termImage img {
- /*margin-right: 1em;*/
  width: 120px;
  height: 120px;
  border: 1px solid #000;
@@ -202,12 +190,6 @@ h4 {
  margin: 0 auto 1em;
  border: 1px solid #000;
  border-radius: 50%;
-}
-
-.leaderImage.termImage img {
-  /*float: left;*/
-  /*margin-right: 1em;*/
-  /*border-radius: 0;*/
 }
 
 .pop-channel {
@@ -280,7 +262,6 @@ div.tooltip {
   max-height: 150px;
   padding: .5em;
   font-size: 1.2em;
-  /*background: #BEEB9F;*/
   background-color: #000;
   color: #fff;
   border: 1px solid #cecece;
