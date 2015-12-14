@@ -11,7 +11,7 @@ router.get("/", function(req, res) {
   // var defaultChannel = 'earthChanges';
   // var defaultChannel = '@presidentialCandidates';
   if (!req.session.currentChannel) {
-    req.session.currentChannel = 1;
+    req.session.currentChannel = 4;
   }
 
   db.channel.find({
